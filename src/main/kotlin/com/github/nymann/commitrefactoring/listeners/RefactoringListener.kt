@@ -11,11 +11,11 @@ class RefactoringListener(private val project: Project) : RefactoringEventListen
         RefactoringStore.addRefactoring(refactoringId, afterData)
         if (false) {
             // TODO: feature toggle
-            triggerCheckInProjectActionInAhorribleWay(project)
+            triggerCheckInProjectActionInAHorribleWay(project)
         }
     }
 
-    private fun triggerCheckInProjectActionInAhorribleWay(project: Project) {
+    private fun triggerCheckInProjectActionInAHorribleWay(project: Project) {
         val actionManager = ActionManager.getInstance()
         val action = actionManager.getAction("CheckinProject") ?: return
 
