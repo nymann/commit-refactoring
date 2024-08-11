@@ -8,10 +8,6 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.nymann.commitrefactoring.toolWindow.MyToolWindowFactory"
-                    id="MyToolWindow"/>
-    </extensions>
-    <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
                 implementation="com.github.nymann.commitrefactoring.RefactoringCommitMessageProvider"/>
     </extensions>
