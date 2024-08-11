@@ -6,17 +6,18 @@ import java.util.*
 object RefactoringStore {
 
     private val refactorings = mutableListOf<Refactoring>()
+    private val undoStack = ArrayDeque<Refactoring>()
+    private val redoStack = ArrayDeque<Refactoring>()
 
     fun addRefactoring(refactoringId: String, afterData: RefactoringEventData?) {
-        refactorings.add(Refactoring(refactoringId, constructCommitMessage(refactoringId, afterData)))
+        val refactoring = Refactoring(refactoringId, constructCommitMessage(refactoringId, afterData))
+        refactorings.add(refactoring)
+        undoStack.push(refactoring)
+        redoStack.clear()
     }
 
     fun getRefactorings(): List<Refactoring> {
         return refactorings
-    }
-
-    fun getLatest(): Refactoring? {
-        return refactorings.lastOrNull()
     }
 
     private fun constructCommitMessage(refactoringId: String, afterData: RefactoringEventData?): String {
@@ -34,6 +35,26 @@ object RefactoringStore {
             it.replaceFirstChar {
                 it.titlecase(Locale.getDefault())
             }
+        }
+    }
+
+    fun clear() {
+        this.refactorings.clear()
+    }
+
+    fun undoLastRefactoring() {
+        if (undoStack.isNotEmpty()) {
+            val lastRefactoring = undoStack.pop()
+            refactorings.remove(lastRefactoring)
+            redoStack.push(lastRefactoring)
+        }
+    }
+
+    fun redoLastRefactoring() {
+        if (redoStack.isNotEmpty()) {
+            val lastUndoneRefactoring = redoStack.pop()
+            refactorings.add(lastUndoneRefactoring)
+            undoStack.push(lastUndoneRefactoring)
         }
     }
 }

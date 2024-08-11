@@ -5,7 +5,6 @@
     <vendor>nymann</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-    <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
@@ -13,6 +12,8 @@
     </extensions>
 
     <projectListeners>
+        <listener class="com.github.nymann.commitrefactoring.listeners.CommitListener"
+                  topic="com.intellij.notification.Notifications"/>
         <listener class="com.github.nymann.commitrefactoring.listeners.RefactoringListener"
                   topic="com.intellij.refactoring.listeners.RefactoringEventListener"/>
     </projectListeners>

@@ -7,7 +7,6 @@ import com.intellij.openapi.vcs.changes.ui.CommitMessageProvider
 class RefactoringCommitMessageProvider : CommitMessageProvider {
 
     override fun getCommitMessage(localChangeList: LocalChangeList, project: Project): String {
-
-        return (RefactoringStore.getLatest() ?: return "").description
+        return RefactoringStore.getRefactorings().joinToString(separator = "\n") { it.description }
     }
 }
