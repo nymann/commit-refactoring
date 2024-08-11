@@ -2,6 +2,11 @@
   <configuration default="false" name="Run Plugin" type="GradleRunConfiguration" factoryName="Gradle">
     <log_file alias="idea.log" path="$PROJECT_DIR$/build/idea-sandbox/system/log/idea.log" />
     <ExternalSystemSettings>
+      <option name="env">
+        <map>
+          <entry key="APPROVAL_TESTS_USE_REPORTER" value="QuietReporter" />
+        </map>
+      </option>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
@@ -14,11 +19,12 @@
           <option value="runIde" />
         </list>
       </option>
-      <option name="vmOptions" value="" />
+      <option name="vmOptions" value="-Didea.debug.mode=true -Didea.is.internal=true -Dide.console.stacktraces=true " />
     </ExternalSystemSettings>
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
     <DebugAllEnabled>false</DebugAllEnabled>
+    <RunAsTest>false</RunAsTest>
     <method v="2" />
   </configuration>
 </component>

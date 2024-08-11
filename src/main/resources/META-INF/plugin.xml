@@ -5,14 +5,19 @@
     <vendor>nymann</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.nymann.commitrefactoring.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow factoryClass="com.github.nymann.commitrefactoring.toolWindow.MyToolWindowFactory"
+                    id="MyToolWindow"/>
+    </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <vcs.commitMessageProvider
+                implementation="com.github.nymann.commitrefactoring.RefactoringCommitMessageProvider"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.nymann.commitrefactoring.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <projectListeners>
+        <listener class="com.github.nymann.commitrefactoring.listeners.RefactoringListener"
+                  topic="com.intellij.refactoring.listeners.RefactoringEventListener"/>
+    </projectListeners>
 </idea-plugin>
