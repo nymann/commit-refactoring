@@ -50,7 +50,4 @@ public class Refactoring {
     }
 
 
-    public String getMessage() {
-        return "Refactoring: " + refactoringId.replace("refactoring.", "").replace(".", " ");
-    }
 }

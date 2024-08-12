@@ -16,7 +16,7 @@ public class CommitListener implements Notifications {
 
     @Override
     public void notify(@NotNull Notification notification) {
-        if (notification.getContent().contains("committed: Refactoring")) {
+        if (notification.getContent().contains("committed:")) {
             SingletonRefactoringStore.getInstance(project).clear();
         }
     }

@@ -13,16 +13,17 @@ public class RefactoringCommitMessageProvider implements CommitMessageProvider {
     public @Nullable String getCommitMessage(@NotNull LocalChangeList localChangeList, @NotNull Project project) {
         List<Refactoring> refactorings = SingletonRefactoringStore.getInstance(project).getRefactorings();
         if (refactorings.isEmpty()) {
-            return "Test";
+            return "UNSAFE";
         }
         if (refactorings.size() == 1) {
-            return refactorings.get(0).getMessage();
+            Refactoring refactoring = refactorings.get(0);
+            return CommitMessageFactory.create(refactoring).getMessage();
         }
         StringBuilder result = new StringBuilder();
         for (Refactoring refactoring : refactorings) {
-            result.append(refactoring.getMessage()).append("\n");
+            CommitMessage commitMessage = CommitMessageFactory.create(refactoring);
+            result.append(commitMessage.getMessage()).append("\n");
         }
-
         return result.toString();
     }
 }
