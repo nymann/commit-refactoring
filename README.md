@@ -14,6 +14,12 @@ https://github.com/user-attachments/assets/49ec925c-116e-4ec8-ad04-089d977d9900
 
 
 <!-- Plugin description -->
+# Commit Refactoring
+**Requires modal editor in IntelliJ**
+
+To enable modal editor in IntelliJ Ultimate:
+> Version Control -> Commit -> Uncheck "Use non-modal commit interface"
+
 Sets the commit message automatically after each IntelliJ refactoring.
 
 Workflow:
