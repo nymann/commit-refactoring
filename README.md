@@ -4,6 +4,10 @@
 [![Version](https://img.shields.io/jetbrains/plugin/v/25085-commit-refactoring.svg)](https://plugins.jetbrains.com/plugin/25085-commit-refactoring)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/25085-commit-refactoring.svg)](https://plugins.jetbrains.com/plugin/25085-commit-refactoring)
 
+
+https://github.com/user-attachments/assets/49ec925c-116e-4ec8-ad04-089d977d9900
+
+
 <!-- Plugin description -->
 Sets the commit message automatically after each IntelliJ refactoring.
 
@@ -12,6 +16,7 @@ Workflow:
 2. You press Command K
 3. Commit message will be predefined to "Refactoring: Extract method {methodName}"
 <!-- Plugin description end -->
+
 
 ## Installation
 
