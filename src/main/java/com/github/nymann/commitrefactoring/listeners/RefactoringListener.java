@@ -20,8 +20,8 @@ public class RefactoringListener implements RefactoringEventListener {
     }
 
     @Override
-    public void refactoringDone(@NotNull String s, @Nullable RefactoringEventData refactoringEventData) {
-        refactorings.addRefactoring(s, refactoringEventData);
+    public void refactoringDone(@NotNull String refactoringId, @Nullable RefactoringEventData refactoringEventData) {
+        refactorings.addRefactoring(refactoringId, refactoringEventData);
     }
 
     @Override
