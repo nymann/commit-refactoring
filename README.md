@@ -1,8 +1,8 @@
 # commit-refactoring
 
 ![Build](https://github.com/nymann/commit-refactoring/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/25085-commit-refactoring.svg)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/25085-commit-refactoring.svg)
+![Version](https://img.shields.io/jetbrains/plugin/v/25085-commit-refactoring.svg)
+![Downloads](https://img.shields.io/jetbrains/plugin/d/25085-commit-refactoring.svg)
 
 <!-- Plugin description -->
 Sets the commit message automatically after each IntelliJ refactoring.

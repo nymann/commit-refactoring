@@ -16,4 +16,9 @@ class RefactoringListener : RefactoringEventListener {
     override fun redoRefactoring(refactoringId: String) {
         RefactoringStore.redoLastRefactoring()
     }
+
+    override fun refactoringStarted(refactoringId: String, beforeData: RefactoringEventData?) {
+        // TODO: We can get the before state eg. we would be able to do 'Rename variable X to Y'
+        super.refactoringStarted(refactoringId, beforeData)
+    }
 }
