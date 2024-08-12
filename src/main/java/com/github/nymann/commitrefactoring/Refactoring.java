@@ -3,6 +3,8 @@ package com.github.nymann.commitrefactoring;
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 
+import java.util.Objects;
+
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
 
 public class Refactoring {
@@ -22,11 +24,11 @@ public class Refactoring {
 
     public Refactoring(String refactoringId, PsiElement before) {
         this.refactoringId = refactoringId;
-        this.before = before;
+        this.before = before.copy();
     }
 
     public Refactoring(String refactoringId, RefactoringEventData before) {
-        this(refactoringId, before.get().get(PSI_ELEMENT_KEY));
+        this(refactoringId, Objects.requireNonNull(before.get().get(PSI_ELEMENT_KEY)));
     }
 
     public PsiElement getAfter() {

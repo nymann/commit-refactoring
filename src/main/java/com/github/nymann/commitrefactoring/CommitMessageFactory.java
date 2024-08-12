@@ -9,6 +9,7 @@ public class CommitMessageFactory {
         return switch (refactoring.getRefactoringId()) {
             case "refactoring.inline.method" -> new InlineMethodCommitMessage(refactoring);
             case "refactoring.extract.method" -> new ExtractMethodCommitMessage(refactoring);
+            case "refactoring.inplace.rename" -> InplaceRenameCommitMessageFactory.create(refactoring);
             default -> new DefaultCommitMessage(refactoring);
         };
     }
