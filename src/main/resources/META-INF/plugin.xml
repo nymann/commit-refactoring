@@ -5,6 +5,7 @@
     <vendor>nymann</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
