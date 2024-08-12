@@ -1,27 +1,41 @@
 package com.github.nymann.commitrefactoring.listeners;
 
+import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.SingletonRefactoringStore;
+import com.intellij.openapi.project.Project;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import com.intellij.refactoring.listeners.RefactoringEventListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class RefactoringListener implements RefactoringEventListener {
     private final SingletonRefactoringStore refactorings;
+    private Refactoring currentRefactoring;
 
-    public RefactoringListener() {
-        this.refactorings = SingletonRefactoringStore.getInstance();
+    public RefactoringListener(Project project) {
+        this.refactorings = SingletonRefactoringStore.getInstance(project);
     }
 
     @Override
     public void refactoringStarted(@NotNull String refactoringId, @Nullable RefactoringEventData beforeData) {
-        // TODO: We can get information about the refactoring here such as what the method was renamed from
-        RefactoringEventListener.super.refactoringStarted(refactoringId, beforeData);
+        if (beforeData != null) {
+            currentRefactoring = new Refactoring(refactoringId, beforeData);
+        } else {
+            currentRefactoring = new Refactoring(refactoringId);
+        }
     }
 
     @Override
     public void refactoringDone(@NotNull String refactoringId, @Nullable RefactoringEventData refactoringEventData) {
-        refactorings.addRefactoring(refactoringId, refactoringEventData);
+        if (currentRefactoring == null) {
+            throw new RuntimeException(refactoringId + " has not been started");
+        }
+        if (refactoringEventData != null) {
+            currentRefactoring.setAfter(refactoringEventData);
+        }
+        refactorings.addRefactoring(currentRefactoring);
     }
 
     @Override

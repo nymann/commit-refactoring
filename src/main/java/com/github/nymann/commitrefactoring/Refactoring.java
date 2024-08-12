@@ -1,43 +1,56 @@
 package com.github.nymann.commitrefactoring;
 
-import java.util.Objects;
+import com.intellij.psi.PsiElement;
+import com.intellij.refactoring.listeners.RefactoringEventData;
 
-public final class Refactoring {
-    private final String id;
-    private final String description;
+import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
 
-    public Refactoring(String id, String description) {
-        this.id = id;
-        this.description = description;
+public class Refactoring {
+    private final String refactoringId;
+    private PsiElement before;
+    private PsiElement after;
+
+    public Refactoring(String refactoringId) {
+        this.refactoringId = refactoringId;
     }
 
-    public String id() {
-        return id;
+    public Refactoring(String refactoringId, PsiElement before, PsiElement after) {
+        this.refactoringId = refactoringId;
+        this.before = before;
+        this.after = after;
     }
 
-    public String description() {
-        return description;
+    public Refactoring(String refactoringId, PsiElement before) {
+        this.refactoringId = refactoringId;
+        this.before = before;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Refactoring) obj;
-        return Objects.equals(this.id, that.id) &&
-                Objects.equals(this.description, that.description);
+    public Refactoring(String refactoringId, RefactoringEventData before) {
+        this(refactoringId, before.get().get(PSI_ELEMENT_KEY));
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, description);
+    public PsiElement getAfter() {
+        return after;
     }
 
-    @Override
-    public String toString() {
-        return "Refactoring[" +
-                "id=" + id + ", " +
-                "description=" + description + ']';
+    public void setAfter(PsiElement after) {
+        this.after = after;
     }
 
+    public void setAfter(RefactoringEventData after) {
+        setAfter(after.get().get(PSI_ELEMENT_KEY));
+    }
+
+    public PsiElement getBefore() {
+        return before;
+    }
+
+    public String getRefactoringId() {
+        return refactoringId;
+    }
+
+
+    public String getMessage() {
+        return "Refactoring: " + refactoringId.replace("refactoring.", "").replace(".", " ");
+    }
 }
