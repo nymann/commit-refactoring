@@ -5,8 +5,6 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/25085-commit-refactoring.svg)](https://plugins.jetbrains.com/plugin/25085-commit-refactoring)
 
 ## Requires modal editor in IntelliJ!
-*Because of this the plugin doesn't currently work in IntelliJ Community Edition since it doesn't have support for modal
-commit interface.*
 
 > Version Control -> Commit -> Uncheck "Use non-modal commit interface"
 
