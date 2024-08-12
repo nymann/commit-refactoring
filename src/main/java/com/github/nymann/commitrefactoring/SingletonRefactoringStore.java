@@ -57,9 +57,9 @@ public class SingletonRefactoringStore {
 
     public void redoLastRefactoring() {
         if (!redoStack.isEmpty()) {
-            Refactoring lastUndoneRefactoring = redoStack.pop();
-            refactorings.add(lastUndoneRefactoring);
-            undoStack.push(lastUndoneRefactoring);
+            Refactoring refactoring = redoStack.pop();
+            refactorings.add(refactoring);
+            undoStack.push(refactoring);
         }
     }
 
