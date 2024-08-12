@@ -8,8 +8,6 @@ import com.intellij.refactoring.listeners.RefactoringEventListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
 public class RefactoringListener implements RefactoringEventListener {
     private final SingletonRefactoringStore refactorings;
     private Refactoring currentRefactoring;

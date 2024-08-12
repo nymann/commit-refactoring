@@ -10,7 +10,7 @@ public class SingletonRefactoringStore {
 
     private static final Map<Project, SingletonRefactoringStore> instances = new HashMap<>();
 
-    private final List<Refactoring> refactoring = new ArrayList<>();
+    private final List<Refactoring> refactorings = new ArrayList<>();
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
     private final Deque<Refactoring> redoStack = new ArrayDeque<>();
 
@@ -23,24 +23,24 @@ public class SingletonRefactoringStore {
     }
 
     public void addRefactoring(Refactoring refactoring) {
-        this.refactoring.add(refactoring);
+        this.refactorings.add(refactoring);
         undoStack.push(refactoring);
         redoStack.clear();
     }
 
     public List<Refactoring> getRefactorings() {
-        return new ArrayList<>(refactoring);
+        return new ArrayList<>(refactorings);
     }
 
     public void clear() {
-        refactoring.clear();
+        refactorings.clear();
     }
 
     public void undoLastRefactoring() {
         if (undoStack.isEmpty()) {
             return;
         }
-        if (refactoring.isEmpty()) {
+        if (refactorings.isEmpty()) {
             // TODO: We have just committed. The user should revert their commit instead
             // Example:
             // Inline Method
@@ -51,14 +51,14 @@ public class SingletonRefactoringStore {
             return;
         }
         Refactoring lastRefactoring = undoStack.pop();
-        refactoring.remove(lastRefactoring);
+        refactorings.remove(lastRefactoring);
         redoStack.push(lastRefactoring);
     }
 
     public void redoLastRefactoring() {
         if (!redoStack.isEmpty()) {
             Refactoring lastUndoneRefactoring = redoStack.pop();
-            refactoring.add(lastUndoneRefactoring);
+            refactorings.add(lastUndoneRefactoring);
             undoStack.push(lastUndoneRefactoring);
         }
     }
