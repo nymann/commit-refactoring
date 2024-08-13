@@ -3,13 +3,13 @@ package com.github.nymann.commitrefactoring;
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 
-import java.util.logging.Logger;
+import com.intellij.openapi.diagnostic.Logger;
 
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_ARRAY_KEY;
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
 
 public class Refactoring {
-    private static final Logger log = Logger.getLogger(Refactoring.class.getName());
+    private static final Logger log = Logger.getInstance(Refactoring.class);
 
     private final String refactoringId;
     private PsiElement before;
@@ -39,7 +39,7 @@ public class Refactoring {
         }
         PsiElement[] psiElements = before.get().get(PSI_ELEMENT_ARRAY_KEY);
         if (psiElements != null) {
-            log.warning("PSI_ELEMENT_ARRAY_KEY found, relevant? " + refactoringId);
+            log.warn("PSI_ELEMENT_ARRAY_KEY found, relevant? " + refactoringId);
         }
     }
 

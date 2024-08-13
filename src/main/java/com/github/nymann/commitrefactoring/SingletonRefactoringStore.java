@@ -1,12 +1,12 @@
 package com.github.nymann.commitrefactoring;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 public class SingletonRefactoringStore {
-    private static final Logger log = Logger.getLogger(SingletonRefactoringStore.class.getName());
+    private static final Logger log = Logger.getInstance(SingletonRefactoringStore.class);
 
     private static final Map<Project, SingletonRefactoringStore> instances = new HashMap<>();
 
@@ -47,7 +47,7 @@ public class SingletonRefactoringStore {
             // Commit
             // Undo Last Refactoring
             // We Should then either not support it or add the reverse refactoring "Extract Method"
-            log.warning("User just committed and want to undo last refactoring, revert your commit instead.");
+            log.warn("User just committed and want to undo last refactoring, revert your commit instead.");
             return;
         }
         Refactoring lastRefactoring = undoStack.pop();
