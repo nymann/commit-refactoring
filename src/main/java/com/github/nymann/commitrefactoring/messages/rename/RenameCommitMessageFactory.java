@@ -18,8 +18,8 @@ public class RenameCommitMessageFactory {
         if (before instanceof PsiField psiField) {
             return new RenameFieldCommitMessage(psiField, (PsiField) after);
         }
-        if (before instanceof PsiVariable psiVariable) {
-            return new RenameVariableCommitMessage(psiVariable, (PsiVariable) after);
+        if (before instanceof PsiLocalVariable psiVariable) {
+            return new RenameVariableCommitMessage(psiVariable, (PsiLocalVariable) after);
         }
         if (before instanceof PsiParameter psiParameter) {
             return new RenameParameterCommitMessage(psiParameter, (PsiParameter) after);

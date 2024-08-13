@@ -1,14 +1,14 @@
 package com.github.nymann.commitrefactoring.messages.rename;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
-import com.intellij.psi.PsiVariable;
+import com.intellij.psi.PsiLocalVariable;
 
 public class RenameVariableCommitMessage implements CommitMessage {
 
-    private final PsiVariable before;
-    private final PsiVariable after;
+    private final PsiLocalVariable before;
+    private final PsiLocalVariable after;
 
-    public RenameVariableCommitMessage(PsiVariable before, PsiVariable after) {
+    public RenameVariableCommitMessage(PsiLocalVariable before, PsiLocalVariable after) {
         this.before = before;
         this.after = after;
     }
