@@ -2,6 +2,7 @@ package com.github.nymann.commitrefactoring.messages;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
+import com.github.nymann.commitrefactoring.UnexpectedBeforeData;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 
@@ -17,7 +18,7 @@ public class InlineMethodCommitMessage implements CommitMessage {
         if (before instanceof PsiMethod psiMethod) {
             return psiMethod.getName();
         }
-        throw new RuntimeException("before was not an instance of PsiMethod, it was: " + before.getClass().getName());
+        throw new UnexpectedBeforeData(before, PsiMethod.class);
     }
 
     @Override

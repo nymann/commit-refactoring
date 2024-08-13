@@ -2,6 +2,8 @@ package com.github.nymann.commitrefactoring.messages;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
+import com.github.nymann.commitrefactoring.UnexpectedAfterData;
+import com.github.nymann.commitrefactoring.UnexpectedBeforeData;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 
@@ -17,7 +19,7 @@ public class RenameFieldCommitMessage implements CommitMessage {
         if (after instanceof PsiField psiField) {
             return psiField.getName();
         }
-        throw new RuntimeException("after was not an instance of PsiField, it was: " + after.getClass().getName());
+        throw new UnexpectedAfterData(after, PsiField.class);
     }
 
     private String getOldName() {
@@ -25,7 +27,7 @@ public class RenameFieldCommitMessage implements CommitMessage {
         if (before instanceof PsiField psiField) {
             return psiField.getName();
         }
-        throw new RuntimeException("after was not an instance of PsiField, it was: " + before.getClass().getName());
+        throw new UnexpectedBeforeData(before, PsiField.class);
     }
 
     @Override

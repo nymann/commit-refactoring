@@ -2,6 +2,7 @@ package com.github.nymann.commitrefactoring.messages;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
+import com.github.nymann.commitrefactoring.UnexpectedAfterData;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 
@@ -12,16 +13,16 @@ public class ExtractMethodCommitMessage implements CommitMessage {
         this.refactoring = refactoring;
     }
 
-    private String getFromMethodName() {
+    private String getToMethodName() {
         PsiElement after = refactoring.getAfter();
         if (after instanceof PsiMethod psiMethod) {
             return psiMethod.getName();
         }
-        throw new RuntimeException("after was not an instance of PsiMethod, it was: " + after.getClass().getName());
+        throw new UnexpectedAfterData(after, PsiMethod.class);
     }
 
     @Override
     public String getMessage() {
-        return "Extract method to '" + getFromMethodName() + "'";
+        return "Extract method to '" + getToMethodName() + "'";
     }
 }
