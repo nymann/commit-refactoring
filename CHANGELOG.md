@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.0.8-beta] - 2024-08-13
+
+### Added specific commit messages for
+
+- Rename Parameter
+- Rename Variable
+- Change Signature
+- Inline Variable
+- Move class to package
+
 ## [0.0.7-beta] - 2024-08-13
 
 - Remove unused class
@@ -25,7 +35,8 @@
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.0.7-beta...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.0.8-beta...HEAD
+[0.0.8-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.7-beta...v0.0.8-beta
 [0.0.7-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.6-beta...v0.0.7-beta
 [0.0.6-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.5-beta...v0.0.6-beta
 [0.0.5-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.2...v0.0.5-beta
