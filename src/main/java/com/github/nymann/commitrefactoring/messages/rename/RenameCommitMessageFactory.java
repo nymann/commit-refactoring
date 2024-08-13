@@ -3,10 +3,7 @@ package com.github.nymann.commitrefactoring.messages.rename;
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.messages.DefaultCommitMessage;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethod;
+import com.intellij.psi.*;
 
 public class RenameCommitMessageFactory {
     public static CommitMessage create(Refactoring refactoring) {
@@ -20,6 +17,9 @@ public class RenameCommitMessageFactory {
         }
         if (before instanceof PsiField psiField) {
             return new RenameFieldCommitMessage(psiField, (PsiField) after);
+        }
+        if (before instanceof PsiVariable psiVariable) {
+            return new RenameVariableCommitMessage(psiVariable, (PsiVariable) after);
         }
         return new DefaultCommitMessage(refactoring);
     }
