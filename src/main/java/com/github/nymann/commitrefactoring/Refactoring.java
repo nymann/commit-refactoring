@@ -1,14 +1,16 @@
 package com.github.nymann.commitrefactoring;
 
-import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 
-import java.util.Objects;
+import java.util.logging.Logger;
 
+import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_ARRAY_KEY;
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
 
 public class Refactoring {
+    private static final Logger log = Logger.getLogger(Refactoring.class.getName());
+
     private final String refactoringId;
     private PsiElement before;
     private PsiElement after;
@@ -31,9 +33,13 @@ public class Refactoring {
     public Refactoring(String refactoringId, RefactoringEventData before) {
         this.refactoringId = refactoringId;
         PsiElement psiElement = before.get().get(PSI_ELEMENT_KEY);
-        // Could also be get(PSI_ELEMENT_ARRAY_KEY)
-        if(psiElement != null) {
+        if (psiElement != null) {
             this.before = psiElement.copy();
+            return;
+        }
+        PsiElement[] psiElements = before.get().get(PSI_ELEMENT_ARRAY_KEY);
+        if (psiElements != null) {
+            log.warning("PSI_ELEMENT_ARRAY_KEY found, relevant? " + refactoringId);
         }
     }
 
