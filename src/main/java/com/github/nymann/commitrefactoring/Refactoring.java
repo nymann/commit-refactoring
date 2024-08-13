@@ -1,9 +1,8 @@
 package com.github.nymann.commitrefactoring;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
-
-import com.intellij.openapi.diagnostic.Logger;
 
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_ARRAY_KEY;
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
@@ -62,6 +61,4 @@ public class Refactoring {
     public String getRefactoringId() {
         return refactoringId;
     }
-
-
 }
