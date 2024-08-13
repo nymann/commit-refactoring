@@ -21,6 +21,9 @@ public class RenameCommitMessageFactory {
         if (before instanceof PsiVariable psiVariable) {
             return new RenameVariableCommitMessage(psiVariable, (PsiVariable) after);
         }
+        if (before instanceof PsiParameter psiParameter) {
+            return new RenameParameterCommitMessage(psiParameter, (PsiParameter) after);
+        }
         return new DefaultCommitMessage(refactoring);
     }
 }
