@@ -5,7 +5,7 @@
 name: Release
 on:
   release:
-    types: [prereleased, released]
+    types: [ prereleased, released ]
 
 jobs:
 
@@ -59,8 +59,9 @@ jobs:
         run: |
           ./gradlew patchChangelog --release-note="$CHANGELOG"
 
-      # Publish the plugin to JetBrains Marketplace
+      # Publish the plugin to JetBrains Marketplace, only for released events
       - name: Publish Plugin
+        if: ${{ github.event.release.prerelease == false }}
         env:
           PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
           CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
