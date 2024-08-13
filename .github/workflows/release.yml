@@ -5,10 +5,9 @@
 name: Release
 on:
   release:
-    types: [ prereleased, released ]
+    types: [prereleased, released]
 
 jobs:
-
   # Prepare and publish the plugin to JetBrains Marketplace repository
   release:
     name: Publish Plugin
@@ -17,7 +16,6 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-
       # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4
@@ -46,7 +44,7 @@ jobs:
           ${{ github.event.release.body }}
           EOM
           )"
-          
+
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -61,7 +59,6 @@ jobs:
 
       # Publish the plugin to JetBrains Marketplace, only for released events
       - name: Publish Plugin
-        if: ${{ github.event.release.prerelease == false }}
         env:
           PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
           CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
@@ -91,7 +88,7 @@ jobs:
           git checkout -b $BRANCH
           git commit -am "Changelog update - $VERSION"
           git push --set-upstream origin $BRANCH
-          
+
           gh label create "$LABEL" \
             --description "Pull requests with release changelog update" \
             --force \
