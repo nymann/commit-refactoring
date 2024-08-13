@@ -1,8 +1,8 @@
-package com.github.nymann.commitrefactoring.messages;
+package com.github.nymann.commitrefactoring.messages.inline;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.UnexpectedBeforeData;
+import com.github.nymann.commitrefactoring.exceptions.UnexpectedBeforeData;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 
@@ -14,7 +14,7 @@ public class InlineMethodCommitMessage implements CommitMessage {
     }
 
     private String getFromMethodName() {
-        PsiElement before = refactoring.getBefore();
+        PsiElement before = refactoring.getFirstBefore();
         if (before instanceof PsiMethod psiMethod) {
             return psiMethod.getName();
         }

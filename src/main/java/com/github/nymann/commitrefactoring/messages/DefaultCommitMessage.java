@@ -16,8 +16,8 @@ public class DefaultCommitMessage implements CommitMessage {
     @Override
     public String getMessage() {
         log.info("Refactoring without concrete implementation, using default. RefactoringId: " + refactoring.getRefactoringId());
-        logElement(refactoring.getBefore(), "Before");
-        logElement(refactoring.getAfter(), "After");
+        logElement(refactoring.getFirstBefore(), "Before");
+        logElement(refactoring.getFirstAfter(), "After");
         return refactoring.getRefactoringId().replace("refactoring.", "").replace(".", " ");
     }
 

@@ -1,7 +1,7 @@
 package com.github.nymann.commitrefactoring.listeners;
 
 import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.SingletonRefactoringStore;
+import com.github.nymann.commitrefactoring.RefactoringStore;
 import com.intellij.openapi.project.Project;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import com.intellij.refactoring.listeners.RefactoringEventListener;
@@ -9,11 +9,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RefactoringListener implements RefactoringEventListener {
-    private final SingletonRefactoringStore refactorings;
+    private final RefactoringStore refactorings;
     private Refactoring currentRefactoring;
 
     public RefactoringListener(Project project) {
-        this.refactorings = SingletonRefactoringStore.getInstance(project);
+        this.refactorings = RefactoringStore.getInstance(project);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.github.nymann.commitrefactoring.listeners;
 
 
-import com.github.nymann.commitrefactoring.SingletonRefactoringStore;
+import com.github.nymann.commitrefactoring.RefactoringStore;
 import com.intellij.notification.Notification;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.project.Project;
@@ -17,7 +17,7 @@ public class CommitListener implements Notifications {
     @Override
     public void notify(@NotNull Notification notification) {
         if (notification.getContent().contains("committed:")) {
-            SingletonRefactoringStore.getInstance(project).clear();
+            RefactoringStore.getInstance(project).clear();
         }
     }
 }

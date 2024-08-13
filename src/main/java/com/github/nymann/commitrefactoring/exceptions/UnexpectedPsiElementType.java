@@ -1,4 +1,4 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.exceptions;
 
 import com.intellij.psi.PsiElement;
 

@@ -9,7 +9,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
-                implementation="com.github.nymann.commitrefactoring.RefactoringCommitMessageProvider"/>
+                implementation="com.github.nymann.commitrefactoring.extensions.RefactoringCommitMessageProvider"/>
     </extensions>
 
     <projectListeners>

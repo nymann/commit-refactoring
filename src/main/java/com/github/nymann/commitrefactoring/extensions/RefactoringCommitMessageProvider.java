@@ -1,5 +1,9 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.extensions;
 
+import com.github.nymann.commitrefactoring.CommitMessage;
+import com.github.nymann.commitrefactoring.Refactoring;
+import com.github.nymann.commitrefactoring.RefactoringStore;
+import com.github.nymann.commitrefactoring.messages.CommitMessageFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.changes.LocalChangeList;
 import com.intellij.openapi.vcs.changes.ui.CommitMessageProvider;
@@ -11,7 +15,7 @@ import java.util.List;
 public class RefactoringCommitMessageProvider implements CommitMessageProvider {
     @Override
     public @Nullable String getCommitMessage(@NotNull LocalChangeList localChangeList, @NotNull Project project) {
-        List<Refactoring> refactorings = SingletonRefactoringStore.getInstance(project).getRefactorings();
+        List<Refactoring> refactorings = RefactoringStore.getInstance(project).getRefactorings();
         if (refactorings.isEmpty()) {
             return "UNSAFE";
         }

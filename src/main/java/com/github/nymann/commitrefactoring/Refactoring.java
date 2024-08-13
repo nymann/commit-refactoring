@@ -1,18 +1,18 @@
 package com.github.nymann.commitrefactoring;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_ARRAY_KEY;
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
 
 public class Refactoring {
-    private static final Logger log = Logger.getInstance(Refactoring.class);
-
     private final String refactoringId;
-    private PsiElement before;
-    private PsiElement after;
+    private List<PsiElement> before;
+    private List<PsiElement> after;
 
     public Refactoring(String refactoringId) {
         this.refactoringId = refactoringId;
@@ -20,43 +20,66 @@ public class Refactoring {
 
     public Refactoring(String refactoringId, PsiElement before, PsiElement after) {
         this.refactoringId = refactoringId;
-        this.before = before;
-        this.after = after;
+        this.before = List.of(before);
+        this.after = List.of(after);
     }
 
     public Refactoring(String refactoringId, PsiElement before) {
         this.refactoringId = refactoringId;
-        this.before = before.copy();
+        this.before = List.of(before.copy());
     }
 
     public Refactoring(String refactoringId, RefactoringEventData before) {
         this.refactoringId = refactoringId;
         PsiElement psiElement = before.get().get(PSI_ELEMENT_KEY);
         if (psiElement != null) {
-            this.before = psiElement.copy();
+            this.before = List.of(psiElement.copy());
             return;
         }
         PsiElement[] psiElements = before.get().get(PSI_ELEMENT_ARRAY_KEY);
+        this.before = new ArrayList<>();
         if (psiElements != null) {
-            log.warn("PSI_ELEMENT_ARRAY_KEY found, relevant? " + refactoringId);
+            for (PsiElement element : psiElements) {
+                this.before.add(element.copy());
+            }
         }
     }
 
-    public PsiElement getAfter() {
+    public List<PsiElement> getAfter() {
         return after;
     }
 
-    public void setAfter(PsiElement after) {
-        this.after = after;
-    }
-
     public void setAfter(RefactoringEventData after) {
-        setAfter(after.get().get(PSI_ELEMENT_KEY));
+        if (after == null) {
+            return;
+        }
+        PsiElement psiElement = after.get().get(PSI_ELEMENT_KEY);
+        if (psiElement != null) {
+            this.after = List.of(psiElement);
+            return;
+        }
+        PsiElement[] psiElements = after.get().get(PSI_ELEMENT_ARRAY_KEY);
+        if (psiElements != null) {
+            this.after = List.of(psiElements);
+        }
     }
 
-
-    public PsiElement getBefore() {
+    public List<PsiElement> getBefore() {
         return before;
+    }
+
+    public PsiElement getFirstAfter() {
+        if (after == null || after.isEmpty()) {
+            return null;
+        }
+        return after.get(0);
+    }
+
+    public PsiElement getFirstBefore() {
+        if (before == null || before.isEmpty()) {
+            return null;
+        }
+        return before.get(0);
     }
 
     public String getRefactoringId() {

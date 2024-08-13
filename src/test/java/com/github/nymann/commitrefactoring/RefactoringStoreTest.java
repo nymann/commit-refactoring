@@ -5,11 +5,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SingletonRefactoringStoreTest {
+public class RefactoringStoreTest {
 
     @Test
     public void testUndoLastRefactoring() {
-        SingletonRefactoringStore store = SingletonRefactoringStore.getInstance("testUndoLastRefactoring");
+        RefactoringStore store = RefactoringStore.getInstance("testUndoLastRefactoring");
         Refactoring refactoring = new Refactoring("");
         store.addRefactoring(refactoring);
         store.undoLastRefactoring();
@@ -18,7 +18,7 @@ public class SingletonRefactoringStoreTest {
 
     @Test
     public void testRedoRefactoring() {
-        SingletonRefactoringStore store = SingletonRefactoringStore.getInstance("testRedoRefactoring");
+        RefactoringStore store = RefactoringStore.getInstance("testRedoRefactoring");
         Refactoring refactoring = new Refactoring("");
         store.addRefactoring(refactoring);
         store.undoLastRefactoring();
@@ -28,7 +28,7 @@ public class SingletonRefactoringStoreTest {
 
     @Test
     public void testMultipleRefactorings() {
-        SingletonRefactoringStore store = SingletonRefactoringStore.getInstance("testMultipleRefactorings");
+        RefactoringStore store = RefactoringStore.getInstance("testMultipleRefactorings");
         Refactoring refactoring1 = new Refactoring("refactor1");
         Refactoring refactoring2 = new Refactoring("refactor2");
 

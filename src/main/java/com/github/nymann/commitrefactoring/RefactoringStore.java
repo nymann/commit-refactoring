@@ -5,25 +5,25 @@ import com.intellij.openapi.project.Project;
 
 import java.util.*;
 
-public class SingletonRefactoringStore {
-    private static final Logger log = Logger.getInstance(SingletonRefactoringStore.class);
+public class RefactoringStore {
+    private static final Logger log = Logger.getInstance(RefactoringStore.class);
 
-    private static final Map<String, SingletonRefactoringStore> instances = new HashMap<>();
+    private static final Map<String, RefactoringStore> instances = new HashMap<>();
 
     private final List<Refactoring> refactorings = new ArrayList<>();
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
     private final Deque<Refactoring> redoStack = new ArrayDeque<>();
 
-    private SingletonRefactoringStore() {
+    private RefactoringStore() {
         // Private constructor to prevent instantiation
     }
 
-    public static SingletonRefactoringStore getInstance(Project project) {
-        return SingletonRefactoringStore.getInstance(project.getLocationHash());
+    public static RefactoringStore getInstance(Project project) {
+        return RefactoringStore.getInstance(project.getLocationHash());
     }
 
-    public static SingletonRefactoringStore getInstance(String projectId) {
-        return instances.computeIfAbsent(projectId, k -> new SingletonRefactoringStore());
+    public static RefactoringStore getInstance(String projectId) {
+        return instances.computeIfAbsent(projectId, k -> new RefactoringStore());
     }
 
     public void addRefactoring(Refactoring refactoring) {
