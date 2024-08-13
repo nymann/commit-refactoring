@@ -3,7 +3,7 @@ package com.github.nymann.commitrefactoring.extensions;
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.RefactoringStore;
-import com.github.nymann.commitrefactoring.messages.CommitMessageFactory;
+import com.github.nymann.commitrefactoring.CommitMessageFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.changes.LocalChangeList;
 import com.intellij.openapi.vcs.changes.ui.CommitMessageProvider;

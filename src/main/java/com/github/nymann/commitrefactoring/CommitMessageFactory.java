@@ -1,7 +1,7 @@
-package com.github.nymann.commitrefactoring.messages;
+package com.github.nymann.commitrefactoring;
 
-import com.github.nymann.commitrefactoring.CommitMessage;
-import com.github.nymann.commitrefactoring.Refactoring;
+import com.github.nymann.commitrefactoring.messages.ChangeSignatureCommitMessage;
+import com.github.nymann.commitrefactoring.messages.DefaultCommitMessage;
 import com.github.nymann.commitrefactoring.messages.extract.ExtractCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.inline.InlineCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.rename.RenameCommitMessageFactory;
@@ -17,6 +17,7 @@ public class CommitMessageFactory {
             case "refactoring.inplace.rename", "refactoring.rename" -> RenameCommitMessageFactory.create(refactoring);
             case "refactoring.safeDelete" -> SafeDeleteCommitMessageFactory.create(refactoring);
             case "refactoring.changeSignature" -> new ChangeSignatureCommitMessage();
+            case "refactoring.move" -> MoveCommitMessageFactory.create(refactoring);
             default -> new DefaultCommitMessage(refactoring);
         };
     }
