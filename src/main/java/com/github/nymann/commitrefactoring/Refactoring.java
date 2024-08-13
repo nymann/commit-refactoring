@@ -54,6 +54,7 @@ public class Refactoring {
         setAfter(after.get().get(PSI_ELEMENT_KEY));
     }
 
+
     public PsiElement getBefore() {
         return before;
     }
