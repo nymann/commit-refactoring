@@ -8,11 +8,6 @@ import com.github.nymann.commitrefactoring.messages.rename.RenameCommitMessageFa
 import com.github.nymann.commitrefactoring.messages.safedelete.SafeDeleteCommitMessageFactory;
 
 public class CommitMessageFactory {
-    private String yo;
-    private void test() {
-        yo = ":)";
-        System.out.println(yo);
-    }
     public static CommitMessage create(Refactoring refactoring) {
         return switch (refactoring.getRefactoringId()) {
             case "refactoring.inline.method", "refactoring.inline.local.variable" ->
