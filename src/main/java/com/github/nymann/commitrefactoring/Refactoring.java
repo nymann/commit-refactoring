@@ -1,5 +1,6 @@
 package com.github.nymann.commitrefactoring;
 
+import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 
@@ -28,7 +29,12 @@ public class Refactoring {
     }
 
     public Refactoring(String refactoringId, RefactoringEventData before) {
-        this(refactoringId, Objects.requireNonNull(before.get().get(PSI_ELEMENT_KEY)));
+        this.refactoringId = refactoringId;
+        PsiElement psiElement = before.get().get(PSI_ELEMENT_KEY);
+        // Could also be get(PSI_ELEMENT_ARRAY_KEY)
+        if(psiElement != null) {
+            this.before = psiElement.copy();
+        }
     }
 
     public PsiElement getAfter() {
