@@ -4,9 +4,15 @@
 
 ## [Unreleased]
 
+## [0.0.7-beta] - 2024-08-13
+
+- Remove unused class
+- Remove unused method
+- Remove unused field
+- Extract Variable
+
 ## [0.0.6-beta] - 2024-08-13
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.0.5-beta...HEAD
 ## [0.0.5-beta] - 2024-08-13
 
 ### Added
@@ -19,7 +25,8 @@
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.0.6-beta...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.0.7-beta...HEAD
+[0.0.7-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.6-beta...v0.0.7-beta
 [0.0.6-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.5-beta...v0.0.6-beta
 [0.0.5-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.2...v0.0.5-beta
 [0.0.2]: https://github.com/nymann/commit-refactoring/commits/v0.0.2
