@@ -3,6 +3,7 @@ package com.github.nymann.commitrefactoring.messages;
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.psi.PsiElement;
 
 public class DefaultCommitMessage implements CommitMessage {
     private static final Logger log = Logger.getInstance(DefaultCommitMessage.class);
@@ -14,7 +15,17 @@ public class DefaultCommitMessage implements CommitMessage {
 
     @Override
     public String getMessage() {
-        log.warn("Refactoring without concrete implementation, using default. RefactoringId: " + refactoring.getRefactoringId());
-        return "Refactoring: " + refactoring.getRefactoringId().replace("refactoring.", "").replace(".", " ");
+        log.info("Refactoring without concrete implementation, using default. RefactoringId: " + refactoring.getRefactoringId());
+        logElement(refactoring.getBefore(), "Before");
+        logElement(refactoring.getAfter(), "After");
+        return refactoring.getRefactoringId().replace("refactoring.", "").replace(".", " ");
+    }
+
+    private void logElement(PsiElement element, String name) {
+        if (element != null) {
+            log.info("- " + name + " Element Type: " + element.getClass().getName());
+            log.debug("- " + name + " Element Text: " + element.getText());
+            log.debug("- " + name + " Element Language: " + element.getLanguage());
+        }
     }
 }
