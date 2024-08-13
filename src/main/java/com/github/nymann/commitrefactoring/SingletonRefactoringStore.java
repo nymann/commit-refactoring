@@ -8,7 +8,7 @@ import java.util.*;
 public class SingletonRefactoringStore {
     private static final Logger log = Logger.getInstance(SingletonRefactoringStore.class);
 
-    private static final Map<Project, SingletonRefactoringStore> instances = new HashMap<>();
+    private static final Map<String, SingletonRefactoringStore> instances = new HashMap<>();
 
     private final List<Refactoring> refactorings = new ArrayList<>();
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
@@ -19,7 +19,11 @@ public class SingletonRefactoringStore {
     }
 
     public static SingletonRefactoringStore getInstance(Project project) {
-        return instances.computeIfAbsent(project, k -> new SingletonRefactoringStore());
+        return SingletonRefactoringStore.getInstance(project.getLocationHash());
+    }
+
+    public static SingletonRefactoringStore getInstance(String projectId) {
+        return instances.computeIfAbsent(projectId, k -> new SingletonRefactoringStore());
     }
 
     public void addRefactoring(Refactoring refactoring) {
