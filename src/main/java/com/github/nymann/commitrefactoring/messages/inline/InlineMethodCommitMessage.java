@@ -1,12 +1,13 @@
 package com.github.nymann.commitrefactoring.messages.inline;
 
+import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.intellij.psi.PsiMethod;
 
 public class InlineMethodCommitMessage implements CommitMessage {
-    private final PsiMethod method;
+    private final CodeElement method;
 
-    public InlineMethodCommitMessage(PsiMethod before) {
+    public InlineMethodCommitMessage(CodeElement before) {
         this.method = before;
     }
 
