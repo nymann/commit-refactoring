@@ -3,10 +3,7 @@ package com.github.nymann.commitrefactoring.messages.safedelete;
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.messages.DefaultCommitMessage;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethod;
+import com.intellij.psi.*;
 
 public class SafeDeleteCommitMessageFactory {
     public static CommitMessage create(Refactoring refactoring) {
@@ -19,6 +16,9 @@ public class SafeDeleteCommitMessageFactory {
         }
         if (deletedElement instanceof PsiMethod psiMethod) {
             return new SafeDeleteMethodCommitMessage(psiMethod);
+        }
+        if (deletedElement instanceof PsiParameter psiParameter) {
+            return new SafeDeleteParameterCommitMessage(psiParameter);
         }
         return new DefaultCommitMessage(refactoring);
     }
