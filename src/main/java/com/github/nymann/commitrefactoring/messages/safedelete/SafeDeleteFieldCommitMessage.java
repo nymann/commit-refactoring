@@ -1,17 +1,16 @@
 package com.github.nymann.commitrefactoring.messages.safedelete;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
-import com.intellij.psi.PsiField;
 
 public class SafeDeleteFieldCommitMessage implements CommitMessage {
-    private final PsiField deletedField;
+    private final String fieldName;
 
-    public SafeDeleteFieldCommitMessage(PsiField deletedField) {
-        this.deletedField = deletedField;
+    public SafeDeleteFieldCommitMessage(String fieldName) {
+        this.fieldName = fieldName;
     }
 
     @Override
     public String getMessage() {
-        return "Remove unused field '" + deletedField.getName() + "'";
+        return "Remove unused field '" + fieldName + "'";
     }
 }

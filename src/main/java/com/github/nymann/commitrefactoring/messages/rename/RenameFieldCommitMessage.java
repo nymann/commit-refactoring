@@ -1,19 +1,18 @@
 package com.github.nymann.commitrefactoring.messages.rename;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
-import com.intellij.psi.PsiField;
 
 public class RenameFieldCommitMessage implements CommitMessage {
-    private final PsiField before;
-    private final PsiField after;
+    private final String fromName;
+    private final String toName;
 
-    public RenameFieldCommitMessage(PsiField before, PsiField after) {
-        this.before = before;
-        this.after = after;
+    public RenameFieldCommitMessage(String fromName, String toName) {
+        this.fromName = fromName;
+        this.toName = toName;
     }
 
     @Override
     public String getMessage() {
-        return "Rename field '" + before.getName() + "' to '" + after.getName() + "'";
+        return "Rename field '" + fromName + "' to '" + toName + "'";
     }
 }

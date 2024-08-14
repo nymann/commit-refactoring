@@ -1,17 +1,16 @@
 package com.github.nymann.commitrefactoring.messages.safedelete;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
-import com.intellij.psi.PsiClass;
 
 public class SafeDeleteClassCommitMessage implements CommitMessage {
-    private final PsiClass deletedClass;
+    private final String className;
 
-    public SafeDeleteClassCommitMessage(PsiClass deletedField) {
-        this.deletedClass = deletedField;
+    public SafeDeleteClassCommitMessage(String className) {
+        this.className = className;
     }
 
     @Override
     public String getMessage() {
-        return "Remove unused class '" + deletedClass.getName() + "'";
+        return "Remove unused class '" + className + "'";
     }
 }

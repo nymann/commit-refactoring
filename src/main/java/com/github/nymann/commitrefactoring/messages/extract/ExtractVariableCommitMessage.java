@@ -1,17 +1,16 @@
 package com.github.nymann.commitrefactoring.messages.extract;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
-import com.intellij.psi.PsiLocalVariable;
 
 public class ExtractVariableCommitMessage implements CommitMessage {
-    private final PsiLocalVariable after;
+    private final String variableName;
 
-    public ExtractVariableCommitMessage(PsiLocalVariable after) {
-        this.after = after;
+    public ExtractVariableCommitMessage(String variableName) {
+        this.variableName = variableName;
     }
 
     @Override
     public String getMessage() {
-        return "Extract variable '" + after.getName() + "'";
+        return "Extract variable '" + variableName + "'";
     }
 }

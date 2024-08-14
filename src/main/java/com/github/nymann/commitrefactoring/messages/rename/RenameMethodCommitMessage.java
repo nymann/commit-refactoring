@@ -1,20 +1,19 @@
 package com.github.nymann.commitrefactoring.messages.rename;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
-import com.intellij.psi.PsiMethod;
 
 public class RenameMethodCommitMessage implements CommitMessage {
 
-    private final PsiMethod before;
-    private final PsiMethod after;
+    private final String beforeName;
+    private final String afterName;
 
-    public RenameMethodCommitMessage(PsiMethod before, PsiMethod after) {
-        this.before = before;
-        this.after = after;
+    public RenameMethodCommitMessage(String beforeName, String afterName) {
+        this.beforeName = beforeName;
+        this.afterName = afterName;
     }
 
     @Override
     public String getMessage() {
-        return "Rename method '" + this.before.getName() + "' to '" + this.after.getName() + "'";
+        return "Rename method '" + beforeName + "' to '" + afterName + "'";
     }
 }

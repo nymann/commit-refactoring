@@ -24,7 +24,7 @@ public class InlineCommitMessageFactory {
         return switch (before.getType()) {
             case METHOD -> new InlineMethodCommitMessage(before.getName());
             case LOCAL_VARIABLE -> new InlineVariableCommitMessage(before.getName());
-            default -> throw new RuntimeException("TODO");
+            default -> new DefaultInlineCommitMessage(before.getType());
         };
     }
 

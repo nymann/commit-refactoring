@@ -1,20 +1,19 @@
 package com.github.nymann.commitrefactoring.messages.rename;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
-import com.intellij.psi.PsiParameter;
 
 public class RenameParameterCommitMessage implements CommitMessage {
 
-    private final PsiParameter before;
-    private final PsiParameter after;
+    private final String fromName;
+    private final String toName;
 
-    public RenameParameterCommitMessage(PsiParameter before, PsiParameter after) {
-        this.before = before;
-        this.after = after;
+    public RenameParameterCommitMessage(String fromName, String toName) {
+        this.fromName = fromName;
+        this.toName = toName;
     }
 
     @Override
     public String getMessage() {
-        return "Rename parameter '" + before.getName() + "' to '" + after.getName() + "'";
+        return "Rename parameter '" + fromName + "' to '" + toName + "'";
     }
 }
