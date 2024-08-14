@@ -5,14 +5,13 @@ import com.github.nymann.commitrefactoring.CodeElementType;
 import com.github.nymann.commitrefactoring.CommitMessage;
 import junit.framework.TestCase;
 
-public class InlineMethodCommitMessageTest extends TestCase {
-
-    public void testGetMessage() {
-        CodeElement element = new CodeElement("test", CodeElementType.METHOD);
+public class InlineVariableCommitMessageTest extends TestCase {
+    public void testCommitMessage() {
+        CodeElement element = new CodeElement("test", CodeElementType.LOCAL_VARIABLE);
         CommitMessage commitMessage = InlineCommitMessageFactory.create(element);
 
         String actual = commitMessage.getMessage();
 
-        assertEquals("Inline method 'test'", actual);
+        assertEquals("Inline variable 'test'", actual);
     }
 }
