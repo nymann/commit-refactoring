@@ -14,7 +14,7 @@ public class InlineCommitMessageFactory {
             return new InlineMethodCommitMessage(psiMethod);
         }
         if (before instanceof PsiLocalVariable psiLocalVariable) {
-            return new InlineLocalVariableCommitMessage(psiLocalVariable);
+            return new InlineVariableCommitMessage(psiLocalVariable);
         }
         return new DefaultCommitMessage(refactoring);
     }

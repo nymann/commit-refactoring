@@ -3,10 +3,10 @@ package com.github.nymann.commitrefactoring.messages.inline;
 import com.github.nymann.commitrefactoring.CommitMessage;
 import com.intellij.psi.PsiLocalVariable;
 
-public class InlineLocalVariableCommitMessage implements CommitMessage {
+public class InlineVariableCommitMessage implements CommitMessage {
     private final PsiLocalVariable variable;
 
-    public InlineLocalVariableCommitMessage(PsiLocalVariable before) {
+    public InlineVariableCommitMessage(PsiLocalVariable before) {
         this.variable = before;
     }
 
