@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.1.1] - 2024-08-13
+
+### Shiny new things
+
+- Adds support for many refactorings
+
 ## [0.0.8-beta] - 2024-08-13
 
 ### Added specific commit messages for
@@ -35,7 +41,8 @@
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.0.8-beta...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/nymann/commit-refactoring/compare/v0.0.8-beta...v0.1.1
 [0.0.8-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.7-beta...v0.0.8-beta
 [0.0.7-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.6-beta...v0.0.7-beta
 [0.0.6-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.5-beta...v0.0.6-beta
