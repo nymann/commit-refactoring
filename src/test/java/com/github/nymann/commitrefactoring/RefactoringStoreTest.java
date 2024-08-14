@@ -6,12 +6,19 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RefactoringStoreTest {
+    private Refactoring emptyRequest(String refactoringId) {
+        CodeElement test = new CodeElement("test", CodeElementType.UNKNOWN);
+        return new Refactoring(refactoringId, test, test);
+    }
+    private Refactoring emptyRequest() {
+        CodeElement test = new CodeElement("test", CodeElementType.UNKNOWN);
+        return new Refactoring("", test, test);
+    }
 
     @Test
     public void testUndoLastRefactoring() {
         RefactoringStore store = RefactoringStore.getInstance("testUndoLastRefactoring");
-        Refactoring refactoring = new Refactoring("");
-        store.addRefactoring(refactoring);
+        store.addRefactoring(emptyRequest());
         store.undoLastRefactoring();
         assertEquals(0, store.getRefactorings().size());
     }
@@ -19,8 +26,7 @@ public class RefactoringStoreTest {
     @Test
     public void testRedoRefactoring() {
         RefactoringStore store = RefactoringStore.getInstance("testRedoRefactoring");
-        Refactoring refactoring = new Refactoring("");
-        store.addRefactoring(refactoring);
+        store.addRefactoring(emptyRequest());
         store.undoLastRefactoring();
         store.redoLastRefactoring();
         assertEquals(1, store.getRefactorings().size());
@@ -29,8 +35,8 @@ public class RefactoringStoreTest {
     @Test
     public void testMultipleRefactorings() {
         RefactoringStore store = RefactoringStore.getInstance("testMultipleRefactorings");
-        Refactoring refactoring1 = new Refactoring("refactor1");
-        Refactoring refactoring2 = new Refactoring("refactor2");
+        Refactoring refactoring1 = emptyRequest("refactor1");
+        Refactoring refactoring2 = emptyRequest("refactor2");
 
         store.addRefactoring(refactoring1);
         store.addRefactoring(refactoring2);

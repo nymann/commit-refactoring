@@ -8,7 +8,7 @@ public class DefaultSafeDeleteCommitMessage implements CommitMessage {
     private static final Logger logger = Logger.getInstance(DefaultSafeDeleteCommitMessage.class);
 
     public DefaultSafeDeleteCommitMessage(CodeElementType codeElementType) {
-        logger.info("Unknown element type: " + codeElementType);
+        logger.info("Unknown element type: " + codeElementType.name());
     }
 
     @Override

@@ -7,5 +7,5 @@ public enum CodeElementType {
     LOCAL_VARIABLE,
     METHOD,
     PACKAGE,
-    PARAMETER
+    CODE_BLOCK, PARAMETER
 }

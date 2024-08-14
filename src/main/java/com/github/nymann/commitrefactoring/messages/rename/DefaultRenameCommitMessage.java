@@ -8,7 +8,7 @@ public class DefaultRenameCommitMessage implements CommitMessage {
     private static final Logger logger = Logger.getInstance(DefaultRenameCommitMessage.class);
 
     public DefaultRenameCommitMessage(CodeElementType codeElementType) {
-        logger.info("Unknown element type: " + codeElementType);
+        logger.info("Unknown element type: " + codeElementType.name());
     }
 
     @Override

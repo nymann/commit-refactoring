@@ -7,7 +7,7 @@ import com.intellij.openapi.diagnostic.Logger;
 public class DefaultInlineCommitMessage implements CommitMessage {
     private static final Logger logger = Logger.getInstance(DefaultInlineCommitMessage.class);
     public DefaultInlineCommitMessage(CodeElementType codeElementType) {
-        logger.info("Unknown element type: " + codeElementType);
+        logger.warn("Unknown element type: " + codeElementType.name());
     }
     @Override
     public String getMessage() {

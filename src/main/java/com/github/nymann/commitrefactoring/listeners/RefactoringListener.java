@@ -1,5 +1,7 @@
 package com.github.nymann.commitrefactoring.listeners;
 
+import com.github.nymann.commitrefactoring.CodeElement;
+import com.github.nymann.commitrefactoring.CodeElementFactory;
 import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.RefactoringStore;
 import com.intellij.openapi.project.Project;
@@ -10,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RefactoringListener implements RefactoringEventListener {
     private final RefactoringStore refactorings;
-    private Refactoring currentRefactoring;
+    private CodeElement before = null;
 
     public RefactoringListener(Project project) {
         this.refactorings = RefactoringStore.getInstance(project);
@@ -18,22 +20,14 @@ public class RefactoringListener implements RefactoringEventListener {
 
     @Override
     public void refactoringStarted(@NotNull String refactoringId, @Nullable RefactoringEventData beforeData) {
-        if (beforeData != null) {
-            currentRefactoring = new Refactoring(refactoringId, beforeData);
-        } else {
-            currentRefactoring = new Refactoring(refactoringId);
-        }
+        before = CodeElementFactory.createFromPsiElement(beforeData);
     }
 
     @Override
     public void refactoringDone(@NotNull String refactoringId, @Nullable RefactoringEventData refactoringEventData) {
-        if (currentRefactoring == null) {
-            throw new RuntimeException(refactoringId + " has not been started");
-        }
-        if (refactoringEventData != null) {
-            currentRefactoring.setAfter(refactoringEventData);
-        }
-        refactorings.addRefactoring(currentRefactoring);
+        CodeElement after = CodeElementFactory.createFromPsiElement(refactoringEventData);
+        Refactoring refactoring = new Refactoring(refactoringId, before, after);
+        refactorings.addRefactoring(refactoring);
     }
 
     @Override
