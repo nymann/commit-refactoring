@@ -12,7 +12,7 @@ public class CommitMessageFactory {
 
     public static CommitMessage create(Refactoring refactoring) {
         return switch (refactoring.refactoringId()) {
-            case "refactoring.inline.method", "refactoring.inline.local.variable" ->
+            case "refactoring.inline.method", "refactoring.inline.local.variable", "refactoring.inline.class" ->
                     InlineCommitMessageFactory.create(refactoring.before());
             case "refactoring.extract.method", "refactoring.extractVariable" ->
                     ExtractCommitMessageFactory.create(refactoring.after());
