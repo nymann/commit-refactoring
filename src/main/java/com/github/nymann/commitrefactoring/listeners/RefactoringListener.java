@@ -4,6 +4,7 @@ import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementFactory;
 import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.RefactoringStore;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import com.intellij.refactoring.listeners.RefactoringEventListener;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RefactoringListener implements RefactoringEventListener {
+    private static final Logger logger = Logger.getInstance(RefactoringListener.class);
     private final RefactoringStore refactorings;
     private CodeElement before = null;
 
@@ -32,8 +34,8 @@ public class RefactoringListener implements RefactoringEventListener {
 
     @Override
     public void conflictsDetected(@NotNull String refactoringId, @NotNull RefactoringEventData conflictsData) {
-        // TODO: Unsafe?
-        RefactoringEventListener.super.conflictsDetected(refactoringId, conflictsData);
+        CodeElement element = CodeElementFactory.createFromPsiElement(conflictsData);
+        logger.warn("Conflict detected: '" + refactoringId + "', data: " + element);
     }
 
     @Override
