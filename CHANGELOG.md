@@ -4,6 +4,9 @@
 
 ## [Unreleased]
 
+## [0.1.2-beta] - 2024-08-15
+
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.1...HEAD
 ## [0.1.1] - 2024-08-13
 
 ### Shiny new things
@@ -41,7 +44,8 @@
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.2-beta...HEAD
+[0.1.2-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.1...v0.1.2-beta
 [0.1.1]: https://github.com/nymann/commit-refactoring/compare/v0.0.8-beta...v0.1.1
 [0.0.8-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.7-beta...v0.0.8-beta
 [0.0.7-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.6-beta...v0.0.7-beta
