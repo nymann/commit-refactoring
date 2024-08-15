@@ -4,6 +4,8 @@ import com.intellij.psi.*;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_ARRAY_KEY;
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
 
@@ -11,12 +13,12 @@ public class CodeElementFactory {
     private static PsiElement createPsiElementFromRefactoringEventData(RefactoringEventData before) {
         PsiElement psiElement = before.get().get(PSI_ELEMENT_KEY);
         if (psiElement != null) {
-            return psiElement.copy();
+            return psiElement;
         }
         PsiElement[] psiElements = before.get().get(PSI_ELEMENT_ARRAY_KEY);
         if (psiElements != null) {
             for (PsiElement element : psiElements) {
-                return element.copy();
+                return element;
             }
         }
         return null;
@@ -32,31 +34,55 @@ public class CodeElementFactory {
         }
         if (element instanceof PsiClass psiClass) {
             return new CodeElement(psiClass.getName(), CodeElementType.CLASS);
-        } else if (element instanceof PsiField psiField) {
+        }
+        if (element instanceof PsiField psiField) {
             return new CodeElement(psiField.getName(), CodeElementType.FIELD);
-        } else if (element instanceof PsiLocalVariable psiLocalVariable) {
+        }
+        if (element instanceof PsiLocalVariable psiLocalVariable) {
             return new CodeElement(psiLocalVariable.getName(), CodeElementType.LOCAL_VARIABLE);
-        } else if (element instanceof PsiMethod psiMethod) {
-            return new CodeElement(psiMethod.getName(), CodeElementType.METHOD);
-        } else if (element instanceof PsiPackage psiPackage) {
+        }
+        if (element instanceof PsiMethod psiMethod) {
+            return psiMethodFactoryMethod(psiMethod);
+        }
+        if (element instanceof PsiPackage psiPackage) {
             return new CodeElement(psiPackage.getQualifiedName(), CodeElementType.PACKAGE);
-        } else if (element instanceof PsiParameter psiParameter) {
+        }
+        if (element instanceof PsiParameter psiParameter) {
             return new CodeElement(psiParameter.getName(), CodeElementType.PARAMETER);
-        } else if (element instanceof PsiCodeBlock psiCodeBlock) {
-            // Inline variable
-            for (@NotNull PsiElement child : psiCodeBlock.getChildren()) {
-                if(child instanceof PsiDeclarationStatement declarationStatement) {
-                    PsiElement[] declaredElements = declarationStatement.getDeclaredElements();
-                    if(declaredElements.length == 1) {
-                        PsiElement declaredElement = declaredElements[0];
-                        if(declaredElement instanceof PsiLocalVariable localVariable) {
-                            return new CodeElement(localVariable.getName(), CodeElementType.LOCAL_VARIABLE);
-                        }
+        }
+        if (element instanceof PsiCodeBlock psiCodeBlock) {
+            return psiCodeBlockFactoryMethod(psiCodeBlock);
+        }
+        return new CodeElement(element.getClass().getName(), CodeElementType.UNKNOWN);
+    }
+
+    private static @NotNull CodeElement psiMethodFactoryMethod(PsiMethod psiMethod) {
+        if (isConstructor(psiMethod)) {
+            return new CodeElement(psiMethod.getName(), CodeElementType.CONSTRUCTOR);
+        }
+        return new CodeElement(psiMethod.getName(), CodeElementType.METHOD);
+    }
+
+    private static @NotNull CodeElement psiCodeBlockFactoryMethod(PsiCodeBlock psiCodeBlock) {
+        for (@NotNull PsiElement child : psiCodeBlock.getChildren()) {
+            if (child instanceof PsiDeclarationStatement declarationStatement) {
+                PsiElement[] declaredElements = declarationStatement.getDeclaredElements();
+                if (declaredElements.length == 1) {
+                    PsiElement declaredElement = declaredElements[0];
+                    if (declaredElement instanceof PsiLocalVariable localVariable) {
+                        return new CodeElement(localVariable.getName(), CodeElementType.LOCAL_VARIABLE);
                     }
                 }
             }
-            return new CodeElement(psiCodeBlock.getText(), CodeElementType.CODE_BLOCK);
         }
-        return new CodeElement(element.getClass().getName(), CodeElementType.UNKNOWN);
+        return new CodeElement(psiCodeBlock.getText(), CodeElementType.CODE_BLOCK);
+    }
+
+    private static boolean isConstructor(PsiMethod psiMethod) {
+        PsiClass containingClass = psiMethod.getContainingClass();
+        if (containingClass == null) {
+            return false;
+        }
+        return Objects.equals(containingClass.getName(), psiMethod.getName());
     }
 }
