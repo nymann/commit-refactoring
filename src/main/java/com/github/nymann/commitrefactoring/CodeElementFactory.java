@@ -2,6 +2,7 @@ package com.github.nymann.commitrefactoring;
 
 import com.intellij.psi.*;
 import com.intellij.refactoring.listeners.RefactoringEventData;
+import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_ARRAY_KEY;
 import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
@@ -42,6 +43,18 @@ public class CodeElementFactory {
         } else if (element instanceof PsiParameter psiParameter) {
             return new CodeElement(psiParameter.getName(), CodeElementType.PARAMETER);
         } else if (element instanceof PsiCodeBlock psiCodeBlock) {
+            // Inline variable
+            for (@NotNull PsiElement child : psiCodeBlock.getChildren()) {
+                if(child instanceof PsiDeclarationStatement declarationStatement) {
+                    PsiElement[] declaredElements = declarationStatement.getDeclaredElements();
+                    if(declaredElements.length == 1) {
+                        PsiElement declaredElement = declaredElements[0];
+                        if(declaredElement instanceof PsiLocalVariable localVariable) {
+                            return new CodeElement(localVariable.getName(), CodeElementType.LOCAL_VARIABLE);
+                        }
+                    }
+                }
+            }
             return new CodeElement(psiCodeBlock.getText(), CodeElementType.CODE_BLOCK);
         }
         return new CodeElement(element.getClass().getName(), CodeElementType.UNKNOWN);
