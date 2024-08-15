@@ -4,7 +4,7 @@ import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
 import junit.framework.TestCase;
 
-public class MoveCommitMessageFactoryTest extends TestCase {
+public class MoveClassToPackageTest extends TestCase {
 
     public void testCreate() {
         CodeElement from = new CodeElement("Test", CodeElementType.CLASS);
