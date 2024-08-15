@@ -9,6 +9,9 @@ public class MoveCommitMessageFactory {
         if (CodeElementType.CLASS.equals(from.type()) && CodeElementType.PACKAGE.equals(to.type())) {
             return new MoveClassToPackage(from.name(), to.name());
         }
+        if (CodeElementType.PACKAGE.equals(from.type()) && CodeElementType.PACKAGE.equals(to.type())) {
+            return new MovePackageIntoPackage(from.name(), to.name());
+        }
         return new DefaultMoveCommitMessage(from.type(), to.type());
     }
 
