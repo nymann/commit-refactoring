@@ -6,12 +6,12 @@ import com.github.nymann.commitrefactoring.CommitMessage;
 public class SafeDeleteCommitMessageFactory {
 
     public static CommitMessage create(CodeElement deletedElement) {
-        return switch (deletedElement.getType()) {
-            case CLASS -> new SafeDeleteClassCommitMessage(deletedElement.getName());
-            case FIELD -> new SafeDeleteFieldCommitMessage(deletedElement.getName());
-            case METHOD -> new SafeDeleteMethodCommitMessage(deletedElement.getName());
-            case PARAMETER -> new SafeDeleteParameterCommitMessage(deletedElement.getName());
-            default -> new DefaultSafeDeleteCommitMessage(deletedElement.getType());
+        return switch (deletedElement.type()) {
+            case CLASS -> new SafeDeleteClassCommitMessage(deletedElement.name());
+            case FIELD -> new SafeDeleteFieldCommitMessage(deletedElement.name());
+            case METHOD -> new SafeDeleteMethodCommitMessage(deletedElement.name());
+            case PARAMETER -> new SafeDeleteParameterCommitMessage(deletedElement.name());
+            default -> new DefaultSafeDeleteCommitMessage(deletedElement.type());
         };
     }
 }
