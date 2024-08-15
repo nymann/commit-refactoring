@@ -11,6 +11,7 @@ public class InlineCommitMessageFactory {
             case LOCAL_VARIABLE -> new InlineVariableCommitMessage(before.name());
             case CONSTRUCTOR -> new InlineConstructorCommitMessage(before.name());
             case CLASS -> new InlineClassCommitMessage(before.name());
+            case PARAMETER -> new InlineParameterCommitMessage(before.name());
             default -> new DefaultInlineCommitMessage(before.type());
         };
     }
