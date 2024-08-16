@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 
 import java.awt.event.KeyEvent;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,8 +25,8 @@ public class InlineVariableRefactoringTest extends TestCase {
     public void testInlineVariableRefactoringAndCommitMessage() {
         StepWorkerKt.step("Creating a new project", () -> createNewProject(generateProjectName()));
         StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
-        //safeDeleteNext();
-        //StepWorkerKt.step("Check that commit message is \"Remove unused class 'A'\"", () -> this.assertCommitMessageAndCommit("A"));
+        safeDeleteNext();
+        StepWorkerKt.step("Check that commit message is \"Remove unused class 'A'\"", () -> this.assertCommitMessageAndCommit("A"));
         //StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
         //StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("B"));
         //safeDeleteNext();
@@ -74,9 +75,26 @@ public class InlineVariableRefactoringTest extends TestCase {
     }
 
 
+    private void rightClickWhenComponentIsVisible(String xpath, Duration timeout) {
+        Instant endTime = Instant.now().plus(timeout);
+        while (Instant.now().isBefore(endTime)) {
+            try {
+                ComponentFixture component = remoteRobot.find(ComponentFixture.class, byXpath(xpath));
+                component.rightClick();
+                return;
+            } catch (Exception ignored) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        throw new RuntimeException("Timeout: Unable to click component within " + timeout.getSeconds() + " seconds");
+    }
+
     private void createAndOpenFile(String className) {
-        ComponentFixture src = remoteRobot.find(ComponentFixture.class, byXpath("//div[@visible_text='src']"), timeout);
-        src.rightClick();
+        rightClickWhenComponentIsVisible("//div[@visible_text='src']", timeout);
         ComponentFixture newB = remoteRobot.find(ComponentFixture.class, byXpath("//div[@text='New']"));
         newB.click();
         ComponentFixture javaClass = remoteRobot.find(ComponentFixture.class, byXpath("//div[@text='New']//div[@text='Java Class']"));
