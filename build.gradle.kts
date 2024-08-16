@@ -54,8 +54,9 @@ repositories {
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
     testImplementation(libs.junit)
-    testImplementation(libs.intellijUiTestRobot)
-    testImplementation(libs.intellijUiTestFixtures)
+    uiTestImplementation(libs.intellijUiTestRobot)
+    uiTestImplementation(libs.intellijUiTestFixtures)
+    uiTestImplementation(kotlin("stdlib"))  // Only add kotlin-stdlib for UI tests
 
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
@@ -158,14 +159,19 @@ tasks {
     publishPlugin {
         dependsOn(patchChangelog)
     }
+    register<Test>("uiTest") {
+        description = "Runs the UI tests."
+        group = "verification"
+        testClassesDirs = sourceSets["uiTest"].output.classesDirs
+        classpath = sourceSets["uiTest"].runtimeClasspath
+        jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+    }
 }
 
 intellijPlatformTesting {
     runIde {
         register("runIdeForUiTests") {
             task {
-                classpath(sourceSets["uiTest"].runtimeClasspath)
-                description = "Runs the UI Robot tests"
                 jvmArgumentProviders += CommandLineArgumentProvider {
                     listOf(
                         "-Drobot-server.port=8082",
