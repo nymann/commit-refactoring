@@ -1,6 +1,7 @@
 [versions]
 # libraries
 junit = "4.13.2"
+intellijUiTestRobot = "0.11.23"
 
 # plugins
 changelog = "2.2.1"
@@ -11,6 +12,8 @@ qodana = "2024.1.9"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+intellijUiTestRobot = { group = "com.intellij.remoterobot", name = "remote-robot", version.ref = "intellijUiTestRobot" }
+intellijUiTestFixtures = { group = "com.intellij.remoterobot", name = "remote-fixtures", version.ref = "intellijUiTestRobot" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
