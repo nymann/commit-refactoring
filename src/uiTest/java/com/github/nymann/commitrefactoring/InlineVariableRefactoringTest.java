@@ -22,15 +22,15 @@ public class InlineVariableRefactoringTest extends TestCase {
     private final Keyboard keyboard = new Keyboard(remoteRobot);
     private final Duration timeout = Duration.ofSeconds(30);
 
-    public void testInlineVariableRefactoringAndCommitMessage() {
+    public void testInlineVariableRefactoringProducesCommitMessageWithNonModalEditor() {
         StepWorkerKt.step("Creating a new project", () -> createNewProject(generateProjectName()));
         StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
         safeDeleteNext();
         StepWorkerKt.step("Check that commit message is \"Remove unused class 'A'\"", () -> this.assertCommitMessageAndCommit("A"));
-        //StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
-        //StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("B"));
-        //safeDeleteNext();
-        //StepWorkerKt.step("Check that commit message is \"Remove unused class 'B'\"", () -> this.assertCommitMessageAndCommit("B"));
+        StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
+        StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("B"));
+        safeDeleteNext();
+        StepWorkerKt.step("Check that commit message is \"Remove unused class 'B'\"", () -> this.assertCommitMessageAndCommit("B"));
     }
 
     private String generateProjectName() {
