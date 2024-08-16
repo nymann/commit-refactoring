@@ -113,6 +113,11 @@ public class InlineVariableRefactoringTest extends TestCase {
     }
 
     private void safeDeleteNext() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         keyboard.key(KeyEvent.VK_F2, Duration.ofSeconds(1));
         keyboard.hotKey(KeyEvent.VK_ALT, KeyEvent.VK_ENTER);
         keyboard.key(KeyEvent.VK_ENTER, Duration.ofSeconds(1));
