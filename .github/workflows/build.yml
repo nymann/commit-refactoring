@@ -1,23 +1,7 @@
-# GitHub Actions Workflow is created for testing and preparing the plugin release in the following steps:
-# - Validate Gradle Wrapper.
-# - Run 'test' and 'verifyPlugin' tasks.
-# - Run Qodana inspections.
-# - Run the 'buildPlugin' task and prepare artifact for further tests.
-# - Run the 'runPluginVerifier' task.
-# - Create a draft release.
-#
-# The workflow is triggered on push and pull_request events.
-#
-# GitHub Actions reference: https://help.github.com/en/actions
-#
-## JBIJPPTPL
-
 name: Build
 on:
-  # Trigger the workflow on pushes to only the 'main' branch (this avoids duplicate checks being run e.g., for dependabot pull requests)
   push:
     branches: [ main ]
-  # Trigger the workflow on any pull request
   pull_request:
 
 concurrency:
@@ -25,8 +9,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
-  # Prepare environment and build the plugin
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -35,33 +17,19 @@ jobs:
       changelog: ${{ steps.properties.outputs.changelog }}
       pluginVerifierHomeDir: ${{ steps.properties.outputs.pluginVerifierHomeDir }}
     steps:
-      - name: Free up more disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4
-
-      # Validate wrapper
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v4
-
-      # Set up Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: zulu
           java-version: 17
-
-      # Setup Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-home-cache-cleanup: true
-
-      # Set environment variables
       - name: Export Properties
         id: properties
         shell: bash
@@ -77,11 +45,9 @@ jobs:
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      # Build plugin
       - name: Build plugin
         run: ./gradlew buildPlugin
 
-      # Prepare plugin archive content for creating artifact
       - name: Prepare Plugin Artifact
         id: artifact
         shell: bash
@@ -92,42 +58,35 @@ jobs:
 
           echo "filename=${FILENAME:0:-4}" >> $GITHUB_OUTPUT
 
-      # Store already-built plugin as an artifact for downloading
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.artifact.outputs.filename }}
           path: ./build/distributions/content/*/*
 
-  # Run tests and upload a code coverage report
   test:
     name: Test
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
 
-      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4
 
-      # Set up Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: zulu
           java-version: 17
 
-      # Setup Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-home-cache-cleanup: true
 
-      # Run tests
       - name: Run Tests
         run: ./gradlew test
 
-      # Collect Tests Result of failed tests
       - name: Collect Tests Result
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
@@ -135,13 +94,11 @@ jobs:
           name: tests-result
           path: ${{ github.workspace }}/build/reports/tests
 
-      # Upload the Kover report to CodeCov
       - name: Upload Code Coverage Report
         uses: codecov/codecov-action@v4
         with:
           files: ${{ github.workspace }}/build/reports/kover/report.xml
 
-  # Run Qodana inspections and provide report
   inspectCode:
     name: Inspect code
     needs: [ build ]
@@ -152,31 +109,26 @@ jobs:
       pull-requests: write
     steps:
 
-      # Free GitHub Actions Environment Disk Space
       - name: Maximize Build Space
         uses: jlumbroso/free-disk-space@main
         with:
           tool-cache: false
           large-packages: false
 
-      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4
 
-      # Set up Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: zulu
           java-version: 17
 
-      # Run Qodana inspections
       - name: Qodana - Code Inspection
         uses: JetBrains/qodana-action@v2024.1.9
         with:
           cache-default-branch-only: true
 
-  # Run plugin structure verification along with IntelliJ Plugin Verifier
   verify:
     name: Verify plugin
     needs: [ build ]
@@ -188,7 +140,7 @@ jobs:
         uses: jlumbroso/free-disk-space@main
         with:
           tool-cache: false
-          large-packages: false
+          large-packages: true
 
       # Check out the current repository
       - name: Fetch Sources
@@ -237,7 +189,6 @@ jobs:
       contents: write
     steps:
 
-      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4
 
