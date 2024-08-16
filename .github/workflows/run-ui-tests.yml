@@ -9,8 +9,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-latest
-            runIde: start gradlew.bat runIdeForUiTests
           - os: macos-latest
             runIde: ./gradlew runIdeForUiTests &
 

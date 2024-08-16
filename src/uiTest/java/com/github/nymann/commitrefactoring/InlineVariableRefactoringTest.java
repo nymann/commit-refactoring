@@ -56,7 +56,6 @@ public class InlineVariableRefactoringTest extends TestCase {
     }
 
     private void createNewProject(String projectName) {
-        System.out.println("Break cache");
         remoteRobot.find(ComponentFixture.class, byXpath("//div[@defaulticon='createNewProjectTab.svg' or (@accessiblename='New Project' and @class='JBOptionButton' and @text='New Project')]"), timeout).click();
         ComponentFixture componentFixture = remoteRobot.find(ComponentFixture.class, byXpath("//div[@accessiblename='Name:' and @class='JBTextField']"), timeout);
         selectAllText(componentFixture);
@@ -74,6 +73,23 @@ public class InlineVariableRefactoringTest extends TestCase {
         return checkbox.isSelected();
     }
 
+    private void leftClickWhenVisible(String xpath, Duration timeout) {
+        Instant endTime = Instant.now().plus(timeout);
+        while (Instant.now().isBefore(endTime)) {
+            try {
+                ComponentFixture component = remoteRobot.find(ComponentFixture.class, byXpath(xpath));
+                component.click();
+                return;
+            } catch (Exception ignored) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        throw new RuntimeException("Timeout: Unable to click component within " + timeout.getSeconds() + " seconds");
+    }
 
     private void rightClickWhenComponentIsVisible(String xpath, Duration timeout) {
         Instant endTime = Instant.now().plus(timeout);
@@ -95,13 +111,18 @@ public class InlineVariableRefactoringTest extends TestCase {
 
     private void createAndOpenFile(String className) {
         rightClickWhenComponentIsVisible("//div[@visible_text='src']", timeout);
-        ComponentFixture newB = remoteRobot.find(ComponentFixture.class, byXpath("//div[@text='New']"));
-        newB.click();
-        ComponentFixture javaClass = remoteRobot.find(ComponentFixture.class, byXpath("//div[@text='New']//div[@text='Java Class']"));
-        javaClass.click();
+        leftClickWhenVisible("//div[@text='New']", timeout);
+        leftClickWhenVisible("//div[@text='New']//div[@text='Java Class']", timeout);
         keyboard.enterText(className);
-        keyboard.enter();
-        keyboard.enter();
+        try {
+            Thread.sleep(1000);
+            keyboard.enter();
+            Thread.sleep(1000);
+            keyboard.enter();
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         remoteRobot.find(ComponentFixture.class, byXpath("//div[@accessiblename='Editor for " + className + ".java']"), timeout).click();
     }
 
