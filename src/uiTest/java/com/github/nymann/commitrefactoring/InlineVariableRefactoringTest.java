@@ -25,11 +25,11 @@ public class InlineVariableRefactoringTest extends TestCase {
         StepWorkerKt.step("Creating a new project", () -> createNewProject(generateProjectName()));
         StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
         safeDeleteNext();
-        StepWorkerKt.step("Check that commit message is correct", () -> this.assertCommitMessageAndCommit("A"));
-        // StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
-        // StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("B"));
-        // safeDeleteNext();
-        // StepWorkerKt.step("Check that commit message is correct", () -> this.assertCommitMessageAndCommit("B"));
+        StepWorkerKt.step("Check that commit message is \"Remove unused class 'A'\"", () -> this.assertCommitMessageAndCommit("A"));
+        StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("A"));
+        StepWorkerKt.step("Creating and opening a new file", () -> this.createAndOpenFile("B"));
+        safeDeleteNext();
+        StepWorkerKt.step("Check that commit message is \"Remove unused class 'B'\"", () -> this.assertCommitMessageAndCommit("B"));
     }
 
     private String generateProjectName() {
@@ -55,7 +55,8 @@ public class InlineVariableRefactoringTest extends TestCase {
     }
 
     private void createNewProject(String projectName) {
-        remoteRobot.find(ComponentFixture.class, byXpath("//div[@defaulticon='createNewProjectTab.svg' or @visible_text='New Project']"), timeout).click();
+        System.out.println("Break cache");
+        remoteRobot.find(ComponentFixture.class, byXpath("//div[@defaulticon='createNewProjectTab.svg' or (@accessiblename='New Project' and @class='JBOptionButton' and @text='New Project')]"), timeout).click();
         ComponentFixture componentFixture = remoteRobot.find(ComponentFixture.class, byXpath("//div[@accessiblename='Name:' and @class='JBTextField']"), timeout);
         selectAllText(componentFixture);
         keyboard.enterText(projectName);
