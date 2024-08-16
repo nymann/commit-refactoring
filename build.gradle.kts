@@ -21,9 +21,24 @@ kotlin {
 
 sourceSets {
     create("uiTest") {
-        java.srcDir("src/uiTest/java")
-        resources.srcDir("src/uiTest/resources")
+        compileClasspath += sourceSets.main.get().output
+        runtimeClasspath += sourceSets.main.get().output
     }
+}
+
+idea {
+    module {
+        testSources.from(sourceSets["uiTest"].kotlin.srcDirs)
+        testResources.from(sourceSets["uiTest"].resources.srcDirs)
+    }
+}
+
+val uiTestImplementation: Configuration by configurations.getting {
+    extendsFrom(configurations.testImplementation.get())
+}
+
+val uiTestRuntimeOnly: Configuration by configurations.getting {
+    extendsFrom(configurations.testRuntimeOnly.get())
 }
 
 // Configure project's dependencies

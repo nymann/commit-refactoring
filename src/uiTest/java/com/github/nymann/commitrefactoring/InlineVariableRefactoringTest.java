@@ -1,4 +1,4 @@
-package robot;
+package com.github.nymann.commitrefactoring;
 
 import com.intellij.remoterobot.RemoteRobot;
 import com.intellij.remoterobot.fixtures.ComponentFixture;
