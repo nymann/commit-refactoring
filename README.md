@@ -12,11 +12,11 @@ Warning: everything besides Java is untested, other languages might work.
 
 Sets the commit message automatically after each IntelliJ refactoring.
 
-Workflow:
+## How it works
 
-1. You do an intelliJ refactoring (extract method fx)
-2. You press Command K
-3. Commit message will be predefined to "Refactoring: Extract method {methodName}"
+1. You do an IntelliJ based refactoring (Extract method)
+2. You open IntelliJ's commit window (<kbd>Command</kbd>+<kbd>K</kbd>)
+3. Commit message will be predefined to "Extract method {methodName}"
 
 <!-- Plugin description end -->
 
