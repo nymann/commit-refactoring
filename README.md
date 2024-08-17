@@ -1,6 +1,6 @@
 # commit-refactoring
 
-![Build](https://github.com/nymann/commit-refactoring/workflows/Build/badge.svg)
+[![Build](https://github.com/nymann/commit-refactoring/workflows/Build/badge.svg)](https://github.com/nymann/commit-refactoring/actions)
 [![Version](https://img.shields.io/jetbrains/plugin/v/25085-commit-refactoring.svg)](https://plugins.jetbrains.com/plugin/25085-commit-refactoring)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/25085-commit-refactoring.svg)](https://plugins.jetbrains.com/plugin/25085-commit-refactoring)
 
