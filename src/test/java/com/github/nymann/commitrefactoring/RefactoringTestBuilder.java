@@ -7,6 +7,10 @@ public class RefactoringTestBuilder {
     private CodeElementType beforeType = CodeElementType.UNKNOWN;
     private CodeElementType afterType = CodeElementType.UNKNOWN;
 
+    public static RefactoringTestBuilder builder() {
+        return new RefactoringTestBuilder();
+    }
+
     public RefactoringTestBuilder refactoringType(RefactoringType refactoringType) {
         this.refactoringType = refactoringType;
         return this;
@@ -29,6 +33,18 @@ public class RefactoringTestBuilder {
 
     public RefactoringTestBuilder afterType(CodeElementType afterType) {
         this.afterType = afterType;
+        return this;
+    }
+
+    public RefactoringTestBuilder before(CodeElement before) {
+        this.beforeType = before.type();
+        this.beforeName = before.name();
+        return this;
+    }
+
+    public RefactoringTestBuilder after(CodeElement after) {
+        this.afterType = after.type();
+        this.afterName = after.name();
         return this;
     }
 

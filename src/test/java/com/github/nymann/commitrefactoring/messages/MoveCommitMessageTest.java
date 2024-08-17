@@ -1,57 +1,56 @@
 package com.github.nymann.commitrefactoring.messages;
 
+
 import com.github.nymann.commitrefactoring.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-public class ExtractCommitMessageTest {
-
-    private RefactoringService refactoringService;
+public class MoveCommitMessageTest {
     private RefactoringTestBuilder refactoringTestBuilder;
+    private RefactoringService refactoringService;
 
     @BeforeEach
     void setUp() {
+        refactoringTestBuilder = new RefactoringTestBuilder()
+                .refactoringType(RefactoringType.MOVE)
+                .afterName("test")
+                .afterType(CodeElementType.PACKAGE);
         refactoringService = new RefactoringService();
-        refactoringTestBuilder = new RefactoringTestBuilder().refactoringType(RefactoringType.EXTRACT);
     }
 
     @Test
-    public void testExtractMethod() {
+    public void testUnknownMove() {
         Refactoring refactoring = refactoringTestBuilder
-                .afterType(CodeElementType.METHOD)
-                .afterName("test")
                 .build();
 
         refactoringService.addRefactoring(refactoring);
 
-        assertEquals("Extract method 'test'", refactoringService.getCommitMessage());
+        assertEquals("Move", refactoringService.getCommitMessage());
     }
 
-
     @Test
-    public void testUnknownExtractMethod() {
+    public void testMoveClassToPackage() {
         Refactoring refactoring = refactoringTestBuilder
-                .afterType(CodeElementType.UNKNOWN)
-                .afterName("test")
+                .beforeName("A")
+                .beforeType(CodeElementType.CLASS)
                 .build();
 
         refactoringService.addRefactoring(refactoring);
 
-        assertEquals("Extract", refactoringService.getCommitMessage());
+        assertEquals("Move class 'A' to 'test'", refactoringService.getCommitMessage());
     }
 
     @Test
-    public void testExtractVariable() {
+    public void testMovePackageIntoPackage() {
         Refactoring refactoring = refactoringTestBuilder
-                .afterType(CodeElementType.LOCAL_VARIABLE)
-                .afterName("test")
+                .beforeName("cat")
+                .beforeType(CodeElementType.PACKAGE)
                 .build();
 
         refactoringService.addRefactoring(refactoring);
 
-        assertEquals("Extract variable 'test'", refactoringService.getCommitMessage());
+        assertEquals("Move package 'cat' into 'test'", refactoringService.getCommitMessage());
     }
 }
