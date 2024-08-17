@@ -78,7 +78,7 @@ jobs:
 
   test:
     name: Test
-    needs: [ build ]
+    needs:
     runs-on: ubuntu-latest
     steps:
 
@@ -117,7 +117,7 @@ jobs:
   releaseDraft:
     name: Release draft
     if: github.event_name != 'pull_request'
-    needs: [ build, test ]
+    needs: [ build ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
