@@ -23,13 +23,14 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
-  
+
 jobs:
 
   # Prepare environment and build the plugin
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 3  # If builds take longer than 3 minutes, optimize.
     outputs:
       version: ${{ steps.properties.outputs.version }}
       changelog: ${{ steps.properties.outputs.changelog }}
