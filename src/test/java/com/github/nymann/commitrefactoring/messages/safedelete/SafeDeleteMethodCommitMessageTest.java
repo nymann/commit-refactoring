@@ -2,10 +2,13 @@ package com.github.nymann.commitrefactoring.messages.safedelete;
 
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class SafeDeleteMethodCommitMessageTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class SafeDeleteMethodCommitMessageTest {
+
+    @Test
     public void testGetMessage() {
         CodeElement codeElement = new CodeElement("test", CodeElementType.METHOD);
 

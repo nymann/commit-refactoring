@@ -2,10 +2,13 @@ package com.github.nymann.commitrefactoring.messages.rename;
 
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class RenameParameterCommitMessageTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class RenameParameterCommitMessageTest {
+
+    @Test
     public void testGetMessage() {
         CodeElement before = new CodeElement("before", CodeElementType.PARAMETER);
         CodeElement after = new CodeElement("after", CodeElementType.PARAMETER);

@@ -3,9 +3,13 @@ package com.github.nymann.commitrefactoring.messages.rename;
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
 import com.github.nymann.commitrefactoring.CommitMessage;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class DefaultRenameCommitMessageTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class DefaultRenameCommitMessageTest {
+
+    @Test
     public void testGetMessage() {
         CodeElement before = new CodeElement("Before", CodeElementType.UNKNOWN);
         CodeElement after = new CodeElement("After", CodeElementType.UNKNOWN);

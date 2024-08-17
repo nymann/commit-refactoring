@@ -2,10 +2,13 @@ package com.github.nymann.commitrefactoring.messages.rename;
 
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class RenameVariableCommitMessageTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class RenameVariableCommitMessageTest {
+
+    @Test
     public void testGetMessage() {
         CodeElement before = new CodeElement("before", CodeElementType.LOCAL_VARIABLE);
         CodeElement after = new CodeElement("after", CodeElementType.LOCAL_VARIABLE);

@@ -1,10 +1,13 @@
 package com.github.nymann.commitrefactoring.messages.move;
 
 import com.github.nymann.commitrefactoring.*;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class MoveClassToPackageTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class MoveClassToPackageTest {
+
+    @Test
     public void testCreate() {
         CodeElement from = new CodeElement("Test", CodeElementType.CLASS);
         CodeElement to = new CodeElement("package", CodeElementType.PACKAGE);

@@ -2,10 +2,13 @@ package com.github.nymann.commitrefactoring.messages.inline;
 
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class InlineClassCommitMessageTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class InlineClassCommitMessageTest {
+
+    @Test
     public void testGetMessage() {
         CodeElement element = new CodeElement("Test", CodeElementType.CLASS);
 
