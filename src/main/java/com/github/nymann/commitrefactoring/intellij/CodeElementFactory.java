@@ -1,5 +1,7 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.intellij;
 
+import com.github.nymann.commitrefactoring.CodeElement;
+import com.github.nymann.commitrefactoring.CodeElementType;
 import com.intellij.psi.*;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import org.jetbrains.annotations.NotNull;

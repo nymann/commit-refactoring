@@ -1,4 +1,6 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.intellij;
+
+import com.github.nymann.commitrefactoring.RefactoringType;
 
 public class RefactoringTypeFactory {
     public static RefactoringType fromIntellij(String refactoringId) {

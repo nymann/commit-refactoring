@@ -1,9 +1,9 @@
 package com.github.nymann.commitrefactoring.intellij.listeners;
 
 import com.github.nymann.commitrefactoring.CodeElement;
-import com.github.nymann.commitrefactoring.CodeElementFactory;
+import com.github.nymann.commitrefactoring.intellij.CodeElementFactory;
 import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.RefactoringTypeFactory;
+import com.github.nymann.commitrefactoring.intellij.RefactoringTypeFactory;
 import com.github.nymann.commitrefactoring.intellij.IntelliJRefactoringService;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
