@@ -1,4 +1,4 @@
-package com.github.nymann.commitrefactoring.messages.extract;
+package com.github.nymann.commitrefactoring.messages;
 
 import com.github.nymann.commitrefactoring.*;
 import org.junit.jupiter.api.Test;
