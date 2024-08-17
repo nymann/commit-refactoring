@@ -214,6 +214,8 @@ jobs:
           
           echo "Disk usage in the Gradle cache:"
           du -sh ~/.gradle/caches/*
+          echo "Check if we have multiple of the same IDEs?"
+          du -sh ~/.gradle/caches/8.9/transforms/*/transformed/idea* 
           
           if [ -d ~/.pluginVerifier ]; then
             du -sh ~/.pluginVerifier/*
