@@ -2,6 +2,7 @@ package com.github.nymann.commitrefactoring;
 
 import com.github.nymann.commitrefactoring.messages.DefaultChangeSignatureCommitMessage;
 import com.github.nymann.commitrefactoring.messages.DefaultCommitMessage;
+import com.github.nymann.commitrefactoring.messages.IntroduceParameterCommitMessage;
 import com.github.nymann.commitrefactoring.messages.extract.ExtractCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.inline.InlineCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.move.MoveCommitMessageFactory;
@@ -19,7 +20,8 @@ public class CommitMessageFactory {
             case MOVE -> MoveCommitMessageFactory.create(refactoring.before(), refactoring.after());
             case RENAME -> RenameCommitMessageFactory.create(refactoring.before(), refactoring.after());
             case SAFE_DELETE -> SafeDeleteCommitMessageFactory.create(refactoring.before());
-            case INTRODUCE_PARAMETER, None -> new DefaultCommitMessage(refactoring);
+            case INTRODUCE_PARAMETER -> new IntroduceParameterCommitMessage();
+            case None -> new DefaultCommitMessage(refactoring);
         };
     }
 }
