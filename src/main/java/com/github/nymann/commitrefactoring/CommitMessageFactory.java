@@ -20,6 +20,7 @@ public class CommitMessageFactory {
             case RENAME -> RenameCommitMessageFactory.create(refactoring.before(), refactoring.after());
             case SAFE_DELETE -> SafeDeleteCommitMessageFactory.create(refactoring.before());
             case INTRODUCE_PARAMETER -> new IntroduceParameterCommitMessage();
+            case PUSH_MEMBERS_DOWN -> PushMembersDownFactory.create(refactoring.before(), refactoring.after());
             case UNKNOWN -> throw new RuntimeException(refactoring.toString());
         };
     }

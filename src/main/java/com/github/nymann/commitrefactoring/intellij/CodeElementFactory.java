@@ -3,34 +3,13 @@ package com.github.nymann.commitrefactoring.intellij;
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
 import com.intellij.psi.*;
-import com.intellij.refactoring.listeners.RefactoringEventData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_ARRAY_KEY;
-import static com.intellij.refactoring.listeners.RefactoringEventData.PSI_ELEMENT_KEY;
-
 public class CodeElementFactory {
-    private static PsiElement createPsiElementFromRefactoringEventData(RefactoringEventData before) {
-        PsiElement psiElement = before.get().get(PSI_ELEMENT_KEY);
-        if (psiElement != null) {
-            return psiElement;
-        }
-        PsiElement[] psiElements = before.get().get(PSI_ELEMENT_ARRAY_KEY);
-        if (psiElements != null) {
-            for (PsiElement element : psiElements) {
-                return element;
-            }
-        }
-        return null;
-    }
 
-    public static CodeElement createFromPsiElement(RefactoringEventData before) {
-        if (before == null) {
-            return new CodeElement("UNKNOWN", CodeElementType.UNKNOWN);
-        }
-        PsiElement element = createPsiElementFromRefactoringEventData(before);
+    public static CodeElement create(PsiElement element) {
         if (element == null) {
             return new CodeElement("UNKNOWN", CodeElementType.UNKNOWN);
         }
@@ -55,7 +34,9 @@ public class CodeElementFactory {
         if (element instanceof PsiCodeBlock psiCodeBlock) {
             return psiCodeBlockFactoryMethod(psiCodeBlock);
         }
-        return new CodeElement(element.getClass().getName(), CodeElementType.UNKNOWN);
+        return new CodeElement(element
+                .getClass()
+                .getName(), CodeElementType.UNKNOWN);
     }
 
     private static @NotNull CodeElement psiMethodFactoryMethod(PsiMethod psiMethod) {
