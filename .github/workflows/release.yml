@@ -37,7 +37,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          cache-cleanup: true
+          cache-cleanup: always
 
       - name: Run Plugin Verification tasks
         run: ./gradlew verifyPlugin
@@ -74,7 +74,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          cache-cleanup: true
+          cache-cleanup: always
 
       # Set environment variables
       - name: Export Properties
