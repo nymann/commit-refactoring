@@ -15,8 +15,6 @@
     </extensions>
 
     <projectListeners>
-        <listener class="com.github.nymann.commitrefactoring.intellij.listeners.CommitListener"
-                  topic="com.intellij.notification.Notifications"/>
         <listener class="com.github.nymann.commitrefactoring.intellij.listeners.RefactoringListener"
                   topic="com.intellij.refactoring.listeners.RefactoringEventListener"/>
     </projectListeners>
