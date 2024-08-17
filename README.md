@@ -36,9 +36,8 @@ Workflow:
 
 - Using the IDE built-in plugin system:
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "
-  commit-refactoring"</kbd> >
-  <kbd>Install</kbd>
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "commit-refactoring"</kbd>
+  > <kbd>Install</kbd>
 
 - Using JetBrains Marketplace:
 
