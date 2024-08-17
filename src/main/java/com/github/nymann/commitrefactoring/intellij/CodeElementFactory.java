@@ -3,7 +3,9 @@ package com.github.nymann.commitrefactoring.intellij;
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
 import com.intellij.psi.*;
+import com.intellij.refactoring.listeners.RefactoringEventData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -67,5 +69,10 @@ public class CodeElementFactory {
             return false;
         }
         return Objects.equals(containingClass.getName(), psiMethod.getName());
+    }
+
+    public static CodeElement create(@Nullable RefactoringEventData beforeData) {
+        PsiElement psiElement = PsiElementFactory.create(beforeData);
+        return CodeElementFactory.create(psiElement);
     }
 }
