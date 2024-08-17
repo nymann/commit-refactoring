@@ -7,10 +7,10 @@ import junit.framework.TestCase;
 public class InlineConstructorCommitMessageTest extends TestCase {
 
     public void testGetMessage() {
-        CodeElement element = new CodeElement("Test", CodeElementType.CLASS);
+        CodeElement element = new CodeElement("Test", CodeElementType.CONSTRUCTOR);
 
         String actual = InlineCommitMessageFactory.create(element).getMessage();
 
-        assertEquals("Inline class 'Test'", actual);
+        assertEquals("Inline constructor in 'Test'", actual);
     }
 }
