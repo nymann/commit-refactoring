@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.1.3] - 2024-08-17
+
+### Added
+
+- Support for non-modal editor
+
 ## [0.1.3-beta] - 2024-08-17
 
 ### Added
@@ -64,7 +70,8 @@
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.3-beta...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/nymann/commit-refactoring/compare/v0.1.3-beta...v0.1.3
 [0.1.3-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.2...v0.1.3-beta
 [0.1.2]: https://github.com/nymann/commit-refactoring/compare/v0.1.2-beta...v0.1.2
 [0.1.2-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.1...v0.1.2-beta
