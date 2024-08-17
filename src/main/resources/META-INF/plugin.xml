@@ -18,4 +18,13 @@
         <listener class="com.github.nymann.commitrefactoring.intellij.listeners.RefactoringListener"
                   topic="com.intellij.refactoring.listeners.RefactoringEventListener"/>
     </projectListeners>
+    <actions>
+        <action id="action.PluginAction"
+                class="com.github.nymann.commitrefactoring.intellij.actions.UpdateCommitMessageViaButton"
+                text="commit-refactoring"
+                description="Sets the commit message based on refactorings"
+                >
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
