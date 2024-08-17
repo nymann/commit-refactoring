@@ -15,7 +15,7 @@ public class DefaultCommitMessage implements CommitMessage {
     @Override
     public String getMessage() {
         log.warn(refactoring.toString());
-        return refactoring.refactoringId().replace("refactoring.", "").replace(".", " ");
+        return refactoring.refactoringType().toString();
     }
 
 }

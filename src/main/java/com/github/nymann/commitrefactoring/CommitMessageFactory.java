@@ -7,21 +7,19 @@ import com.github.nymann.commitrefactoring.messages.inline.InlineCommitMessageFa
 import com.github.nymann.commitrefactoring.messages.move.MoveCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.rename.RenameCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.safedelete.SafeDeleteCommitMessageFactory;
+import org.jetbrains.annotations.NotNull;
 
 public class CommitMessageFactory {
 
-    public static CommitMessage create(Refactoring refactoring) {
-        return switch (refactoring.refactoringId()) {
-            case "refactoring.inline.method", "refactoring.inline.local.variable", "refactoring.inline.class",
-                 "refactoring.inline.parameter" -> InlineCommitMessageFactory.create(refactoring.before());
-            case "refactoring.extract.method", "refactoring.extractVariable" ->
-                    ExtractCommitMessageFactory.create(refactoring.after());
-            case "refactoring.inplace.rename", "refactoring.rename" ->
-                    RenameCommitMessageFactory.create(refactoring.before(), refactoring.after());
-            case "refactoring.safeDelete" -> SafeDeleteCommitMessageFactory.create(refactoring.before());
-            case "refactoring.changeSignature" -> new DefaultChangeSignatureCommitMessage();
-            case "refactoring.move" -> MoveCommitMessageFactory.create(refactoring.before(), refactoring.after());
-            default -> new DefaultCommitMessage(refactoring);
+    public static @NotNull CommitMessage create(Refactoring refactoring) {
+        return switch (refactoring.refactoringType()) {
+            case CHANGE_SIGNATURE -> new DefaultChangeSignatureCommitMessage();
+            case EXTRACT -> ExtractCommitMessageFactory.create(refactoring.before());
+            case INLINE -> InlineCommitMessageFactory.create(refactoring.before());
+            case MOVE -> MoveCommitMessageFactory.create(refactoring.before(), refactoring.after());
+            case RENAME -> RenameCommitMessageFactory.create(refactoring.before(), refactoring.after());
+            case SAFE_DELETE -> SafeDeleteCommitMessageFactory.create(refactoring.before());
+            case INTRODUCE_PARAMETER, None -> new DefaultCommitMessage(refactoring);
         };
     }
 }

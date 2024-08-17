@@ -6,13 +6,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RefactoringServiceTest {
-    private Refactoring emptyRequest(String refactoringId) {
-        CodeElement test = new CodeElement("test", CodeElementType.UNKNOWN);
-        return new Refactoring(refactoringId, test, test);
-    }
     private Refactoring emptyRequest() {
         CodeElement test = new CodeElement("test", CodeElementType.UNKNOWN);
-        return new Refactoring("", test, test);
+        return new Refactoring(RefactoringType.None, test, test);
     }
 
     @Test
@@ -35,8 +31,8 @@ public class RefactoringServiceTest {
     @Test
     public void testMultipleRefactorings() {
         RefactoringService store = new RefactoringService();
-        Refactoring refactoring1 = emptyRequest("refactor1");
-        Refactoring refactoring2 = emptyRequest("refactor2");
+        Refactoring refactoring1 = emptyRequest();
+        Refactoring refactoring2 = emptyRequest();
 
         store.addRefactoring(refactoring1);
         store.addRefactoring(refactoring2);

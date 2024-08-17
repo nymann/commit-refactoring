@@ -10,6 +10,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
                 implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCommitMessageProvider"/>
+        <checkinHandlerFactory
+                implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCheckinHandlerFactory"/>
     </extensions>
 
     <projectListeners>

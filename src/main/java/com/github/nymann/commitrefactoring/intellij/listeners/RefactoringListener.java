@@ -3,6 +3,7 @@ package com.github.nymann.commitrefactoring.intellij.listeners;
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementFactory;
 import com.github.nymann.commitrefactoring.Refactoring;
+import com.github.nymann.commitrefactoring.RefactoringTypeFactory;
 import com.github.nymann.commitrefactoring.intellij.IntelliJRefactoringService;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -28,7 +29,7 @@ public class RefactoringListener implements RefactoringEventListener {
     @Override
     public void refactoringDone(@NotNull String refactoringId, @Nullable RefactoringEventData refactoringEventData) {
         CodeElement after = CodeElementFactory.createFromPsiElement(refactoringEventData);
-        Refactoring refactoring = new Refactoring(refactoringId, before, after);
+        Refactoring refactoring = new Refactoring(RefactoringTypeFactory.fromIntellij(refactoringId), before, after);
         refactorings.addRefactoring(refactoring);
     }
 
