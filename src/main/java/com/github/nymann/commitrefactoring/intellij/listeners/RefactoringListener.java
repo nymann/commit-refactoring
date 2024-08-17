@@ -1,10 +1,11 @@
 package com.github.nymann.commitrefactoring.intellij.listeners;
 
 import com.github.nymann.commitrefactoring.CodeElement;
-import com.github.nymann.commitrefactoring.intellij.CodeElementFactory;
 import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.intellij.RefactoringTypeFactory;
+import com.github.nymann.commitrefactoring.RefactoringType;
+import com.github.nymann.commitrefactoring.intellij.CodeElementFactory;
 import com.github.nymann.commitrefactoring.intellij.IntelliJRefactoringService;
+import com.github.nymann.commitrefactoring.intellij.RefactoringTypeFactory;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.refactoring.listeners.RefactoringEventData;
@@ -29,8 +30,13 @@ public class RefactoringListener implements RefactoringEventListener {
     @Override
     public void refactoringDone(@NotNull String refactoringId, @Nullable RefactoringEventData refactoringEventData) {
         CodeElement after = CodeElementFactory.createFromPsiElement(refactoringEventData);
-        Refactoring refactoring = new Refactoring(RefactoringTypeFactory.fromIntellij(refactoringId), before, after);
-        refactorings.addRefactoring(refactoring);
+        RefactoringType refactoringType = RefactoringTypeFactory.fromIntellij(refactoringId);
+        if (RefactoringType.UNKNOWN.equals(refactoringType)) {
+            logger.warn(refactoringId + " is unsupported");
+        } else {
+            Refactoring refactoring = new Refactoring(refactoringType, before, after);
+            refactorings.addRefactoring(refactoring);
+        }
     }
 
     @Override

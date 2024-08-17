@@ -1,7 +1,7 @@
 package com.github.nymann.commitrefactoring;
 
 public class RefactoringTestBuilder {
-    private RefactoringType refactoringType = RefactoringType.None;
+    private RefactoringType refactoringType = RefactoringType.UNKNOWN;
     private String beforeName = null;
     private String afterName = null;
     private CodeElementType beforeType = CodeElementType.UNKNOWN;

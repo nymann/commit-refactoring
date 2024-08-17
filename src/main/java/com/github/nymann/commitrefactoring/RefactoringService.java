@@ -1,5 +1,6 @@
 package com.github.nymann.commitrefactoring;
 
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -45,9 +46,6 @@ public final class RefactoringService {
     }
 
     public String getCommitMessage() {
-        if (refactorings.isEmpty()) {
-            return "UNSAFE";
-        }
         if (refactorings.size() == 1) {
             Refactoring refactoring = refactorings.get(0);
             return CommitMessageFactory.create(refactoring).getMessage();

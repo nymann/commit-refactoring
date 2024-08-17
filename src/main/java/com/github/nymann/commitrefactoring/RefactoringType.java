@@ -8,6 +8,6 @@ public enum RefactoringType {
     MOVE,
     RENAME,
     SAFE_DELETE,
-    None,
+    UNKNOWN,
 }
 

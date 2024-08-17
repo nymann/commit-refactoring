@@ -13,7 +13,7 @@ public class RefactoringTypeFactory {
             case "refactoring.changeSignature" -> RefactoringType.CHANGE_SIGNATURE;
             case "refactoring.move" -> RefactoringType.MOVE;
             case "refactoring.introduceParameter" -> RefactoringType.INTRODUCE_PARAMETER;
-            default -> RefactoringType.None;
+            default -> RefactoringType.UNKNOWN;
         };
     }
 }
