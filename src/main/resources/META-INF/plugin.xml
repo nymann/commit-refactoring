@@ -9,13 +9,13 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
-                implementation="com.github.nymann.commitrefactoring.extensions.RefactoringCommitMessageProvider"/>
+                implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCommitMessageProvider"/>
     </extensions>
 
     <projectListeners>
-        <listener class="com.github.nymann.commitrefactoring.listeners.CommitListener"
+        <listener class="com.github.nymann.commitrefactoring.intellij.listeners.CommitListener"
                   topic="com.intellij.notification.Notifications"/>
-        <listener class="com.github.nymann.commitrefactoring.listeners.RefactoringListener"
+        <listener class="com.github.nymann.commitrefactoring.intellij.listeners.RefactoringListener"
                   topic="com.intellij.refactoring.listeners.RefactoringEventListener"/>
     </projectListeners>
 </idea-plugin>

@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class RefactoringStoreTest {
+public class RefactoringServiceTest {
     private Refactoring emptyRequest(String refactoringId) {
         CodeElement test = new CodeElement("test", CodeElementType.UNKNOWN);
         return new Refactoring(refactoringId, test, test);
@@ -17,7 +17,7 @@ public class RefactoringStoreTest {
 
     @Test
     public void testUndoLastRefactoring() {
-        RefactoringStore store = RefactoringStore.getInstance("testUndoLastRefactoring");
+        RefactoringService store = new RefactoringService();
         store.addRefactoring(emptyRequest());
         store.undoLastRefactoring();
         assertEquals(0, store.getRefactorings().size());
@@ -25,7 +25,7 @@ public class RefactoringStoreTest {
 
     @Test
     public void testRedoRefactoring() {
-        RefactoringStore store = RefactoringStore.getInstance("testRedoRefactoring");
+        RefactoringService store = new RefactoringService();
         store.addRefactoring(emptyRequest());
         store.undoLastRefactoring();
         store.redoLastRefactoring();
@@ -34,7 +34,7 @@ public class RefactoringStoreTest {
 
     @Test
     public void testMultipleRefactorings() {
-        RefactoringStore store = RefactoringStore.getInstance("testMultipleRefactorings");
+        RefactoringService store = new RefactoringService();
         Refactoring refactoring1 = emptyRequest("refactor1");
         Refactoring refactoring2 = emptyRequest("refactor2");
 
