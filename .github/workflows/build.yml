@@ -76,8 +76,11 @@ jobs:
           echo "Disk usage in the Gradle cache:"
           du -sh ~/.gradle/caches/*
           
-          echo "Disk usage in the Plugin Verifier directory:"
-          du -sh ~/.pluginVerifier/*
+          if [ -d ~/.pluginVerifier ]; then
+            du -sh ~/.pluginVerifier/*
+          else
+            echo "~/.pluginVerifier directory does not exist"
+          fi
       # Set environment variables
       - name: Export Properties
         id: properties
