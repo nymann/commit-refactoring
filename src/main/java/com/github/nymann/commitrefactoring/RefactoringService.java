@@ -1,7 +1,5 @@
 package com.github.nymann.commitrefactoring;
 
-import com.github.nymann.commitrefactoring.intellij.IntelliJRefactoringService;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
