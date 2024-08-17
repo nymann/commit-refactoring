@@ -7,15 +7,16 @@
 ## [0.1.2-beta] - 2024-08-15
 
 [Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.1...HEAD
+
 ## [0.1.1] - 2024-08-13
 
-### Shiny new things
+### Added
 
-- Adds support for many refactorings
+- Support for many refactorings
 
 ## [0.0.8-beta] - 2024-08-13
 
-### Added specific commit messages for
+### Added
 
 - Rename Parameter
 - Rename Variable
@@ -24,6 +25,8 @@
 - Move class to package
 
 ## [0.0.7-beta] - 2024-08-13
+
+### Added
 
 - Remove unused class
 - Remove unused method
@@ -45,10 +48,17 @@
 Automatic deployment via GitHub actions
 
 [Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.2-beta...HEAD
+
 [0.1.2-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.1...v0.1.2-beta
+
 [0.1.1]: https://github.com/nymann/commit-refactoring/compare/v0.0.8-beta...v0.1.1
+
 [0.0.8-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.7-beta...v0.0.8-beta
+
 [0.0.7-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.6-beta...v0.0.7-beta
+
 [0.0.6-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.5-beta...v0.0.6-beta
+
 [0.0.5-beta]: https://github.com/nymann/commit-refactoring/compare/v0.0.2...v0.0.5-beta
+
 [0.0.2]: https://github.com/nymann/commit-refactoring/commits/v0.0.2
