@@ -5,6 +5,7 @@ import com.github.nymann.commitrefactoring.messages.IntroduceParameterCommitMess
 import com.github.nymann.commitrefactoring.messages.extract.ExtractCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.inline.InlineCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.move.MoveCommitMessageFactory;
+import com.github.nymann.commitrefactoring.messages.pushmembersdown.PushMembersDownFactory;
 import com.github.nymann.commitrefactoring.messages.rename.RenameCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.safedelete.SafeDeleteCommitMessageFactory;
 import org.jetbrains.annotations.NotNull;

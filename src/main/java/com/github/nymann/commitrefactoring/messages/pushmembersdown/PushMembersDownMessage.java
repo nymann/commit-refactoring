@@ -1,4 +1,6 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.messages.pushmembersdown;
+
+import com.github.nymann.commitrefactoring.CommitMessage;
 
 public class PushMembersDownMessage implements CommitMessage {
     @Override
