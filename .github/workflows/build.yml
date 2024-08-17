@@ -30,7 +30,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 3  # If builds take longer than 3 minutes, optimize.
+    timeout-minutes: 10
     outputs:
       version: ${{ steps.properties.outputs.version }}
       changelog: ${{ steps.properties.outputs.changelog }}
@@ -74,9 +74,7 @@ jobs:
           du -sh ~/*
           
           echo "Disk usage in the Gradle cache:"
-          du -sh ~/.gradle/caches/modules-2/files-2.1/
-          du -sh ~/.gradle/caches/jars-3/
-          du -sh ~/.gradle/caches/transforms-3/
+          du -sh ~/.gradle/caches/*
           
           echo "Disk usage in the Plugin Verifier directory:"
           du -sh ~/.pluginVerifier/*
