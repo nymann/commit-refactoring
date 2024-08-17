@@ -4,21 +4,9 @@
 [![Version](https://img.shields.io/jetbrains/plugin/v/25085-commit-refactoring.svg)](https://plugins.jetbrains.com/plugin/25085-commit-refactoring)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/25085-commit-refactoring.svg)](https://plugins.jetbrains.com/plugin/25085-commit-refactoring)
 
-## Requires modal editor in IntelliJ!
-
-> Version Control -> Commit -> Uncheck "Use non-modal commit interface"
-
-https://github.com/user-attachments/assets/49ec925c-116e-4ec8-ad04-089d977d9900
-
-
 <!-- Plugin description -->
 
 # Commit Refactoring
-
-**Requires modal editor in IntelliJ**
-
-To enable modal editor in IntelliJ:
-> Version Control -> Commit -> Uncheck "Use non-modal commit interface"
 
 Warning: everything besides Java is untested, other languages might work.
 
