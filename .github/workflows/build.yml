@@ -40,6 +40,13 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v4
 
+      # Free GitHub Actions Environment Disk Space
+      - name: Maximize Build Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          large-packages: false
+
       # Validate wrapper
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v4
@@ -57,6 +64,21 @@ jobs:
         with:
           gradle-home-cache-cleanup: true
 
+      # Check disk usage to identify large directories
+      - name: Analyze Disk Usage
+        run: |
+          echo "Disk usage before cleanup:"
+          df -h
+          echo "Disk usage in the home directory:"
+          du -sh ~/*
+          
+          echo "Disk usage in the Gradle cache:"
+          du -sh ~/.gradle/caches/modules-2/files-2.1/
+          du -sh ~/.gradle/caches/jars-3/
+          du -sh ~/.gradle/caches/transforms-3/
+          
+          echo "Disk usage in the Plugin Verifier directory:"
+          du -sh ~/.pluginVerifier/*
       # Set environment variables
       - name: Export Properties
         id: properties
