@@ -10,20 +10,24 @@ import org.jetbrains.annotations.NotNull;
 public class RefactoringCheckinHandlerFactory extends CheckinHandlerFactory {
     @Override
     public @NotNull CheckinHandler createHandler(@NotNull CheckinProjectPanel panel, @NotNull CommitContext commitContext) {
-        return new RefactoringCheckinHandler(panel.getProject().getService(IntelliJRefactoringService.class));
+        return new RefactoringCheckinHandler(panel
+                .getProject()
+                .getService(IntelliJRefactoringService.class), panel);
     }
 
     private static class RefactoringCheckinHandler extends CheckinHandler {
 
-        private final IntelliJRefactoringService service;
+        private final IntelliJRefactoringService refactoringService;
 
-        private RefactoringCheckinHandler(IntelliJRefactoringService service1) {
-            service = service1;
+        private RefactoringCheckinHandler(IntelliJRefactoringService refactoringService, CheckinProjectPanel panel) {
+            this.refactoringService = refactoringService;
+            this.refactoringService.setPanel(panel);
         }
+
 
         @Override
         public void checkinSuccessful() {
-            service.clearRefactorings();
+            refactoringService.clearRefactorings();
             super.checkinSuccessful();
         }
     }

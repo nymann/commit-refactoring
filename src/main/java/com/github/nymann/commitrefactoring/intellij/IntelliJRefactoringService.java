@@ -4,12 +4,14 @@ import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.RefactoringService;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.vcs.CheckinProjectPanel;
 
 @Service(Service.Level.PROJECT)
 public final class IntelliJRefactoringService {
     private static final Logger log = Logger.getInstance(IntelliJRefactoringService.class);
 
     private final RefactoringService refactoringService;
+    private CheckinProjectPanel panel;
 
     public IntelliJRefactoringService() {
         this.refactoringService = new RefactoringService();
@@ -33,5 +35,17 @@ public final class IntelliJRefactoringService {
 
     public String getCommitMessage() {
         return this.refactoringService.getCommitMessage();
+    }
+
+    public void setCommitMessageOnPanel() {
+        if (this.panel == null) {
+            log.error("Tried to set commit message but panel is null");
+        } else {
+            this.panel.setCommitMessage(getCommitMessage());
+        }
+    }
+
+    public void setPanel(CheckinProjectPanel panel) {
+        this.panel = panel;
     }
 }

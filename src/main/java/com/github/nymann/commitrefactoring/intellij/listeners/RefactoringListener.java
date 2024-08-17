@@ -15,11 +15,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class RefactoringListener implements RefactoringEventListener {
     private static final Logger logger = Logger.getInstance(RefactoringListener.class);
-    private final IntelliJRefactoringService refactorings;
+    private final IntelliJRefactoringService refactoringService;
     private CodeElement before = null;
 
     public RefactoringListener(Project project) {
-        this.refactorings = project.getService(IntelliJRefactoringService.class);
+        this.refactoringService = project.getService(IntelliJRefactoringService.class);
     }
 
     @Override
@@ -33,10 +33,11 @@ public class RefactoringListener implements RefactoringEventListener {
         RefactoringType refactoringType = RefactoringTypeFactory.fromIntellij(refactoringId);
         if (RefactoringType.UNKNOWN.equals(refactoringType)) {
             logger.warn(refactoringId + " is unsupported");
-        } else {
-            Refactoring refactoring = new Refactoring(refactoringType, before, after);
-            refactorings.addRefactoring(refactoring);
+            return;
         }
+        Refactoring refactoring = new Refactoring(refactoringType, before, after);
+        refactoringService.addRefactoring(refactoring);
+        refactoringService.setCommitMessageOnPanel();
     }
 
     @Override
@@ -47,11 +48,11 @@ public class RefactoringListener implements RefactoringEventListener {
 
     @Override
     public void undoRefactoring(@NotNull String refactoringId) {
-        refactorings.undoLastRefactoring();
+        refactoringService.undoLastRefactoring();
     }
 
     @Override
     public void redoRefactoring(@NotNull String refactoringId) {
-        refactorings.redoLastRefactoring();
+        refactoringService.redoLastRefactoring();
     }
 }

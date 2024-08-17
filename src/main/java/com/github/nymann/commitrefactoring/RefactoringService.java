@@ -17,10 +17,6 @@ public final class RefactoringService {
         redoStack.clear();
     }
 
-    public List<Refactoring> getRefactorings() {
-        return new ArrayList<>(refactorings);
-    }
-
     public void clearRefactorings() {
         refactorings.clear();
     }
@@ -48,12 +44,16 @@ public final class RefactoringService {
     public String getCommitMessage() {
         if (refactorings.size() == 1) {
             Refactoring refactoring = refactorings.get(0);
-            return CommitMessageFactory.create(refactoring).getMessage();
+            return CommitMessageFactory
+                    .create(refactoring)
+                    .getMessage();
         }
         StringBuilder result = new StringBuilder();
         for (Refactoring refactoring : refactorings) {
             CommitMessage commitMessage = CommitMessageFactory.create(refactoring);
-            result.append(commitMessage.getMessage()).append("\n");
+            result
+                    .append(commitMessage.getMessage())
+                    .append("\n");
         }
         return result.toString();
     }
