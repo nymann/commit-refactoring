@@ -1,9 +1,6 @@
 package com.github.nymann.commitrefactoring.messages;
 
-import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.RefactoringService;
-import com.github.nymann.commitrefactoring.RefactoringTestBuilder;
-import com.github.nymann.commitrefactoring.RefactoringType;
+import com.github.nymann.commitrefactoring.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +25,20 @@ public class ExtractDelegateCommitMessageTest {
 
         String commitMessage = refactoringService.getCommitMessage();
         assertEquals("Extract delegate", commitMessage);
+    }
+
+    @Test
+    void testExtractDelegate() {
+        Refactoring refactoring = refactoringTestBuilder
+                .beforeName("Foo")
+                .beforeType(CodeElementType.CLASS)
+                .afterName("Bar")
+                .afterType(CodeElementType.CLASS)
+                .build();
+
+        refactoringService.addRefactoring(refactoring);
+
+        String commitMessage = refactoringService.getCommitMessage();
+        assertEquals("Extract delegate from 'Foo' to 'Bar'", commitMessage);
     }
 }
