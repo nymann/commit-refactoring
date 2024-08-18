@@ -11,6 +11,7 @@ public enum RefactoringType {
     PUSH_MEMBERS_DOWN,
     MAKE_STATIC,
     EXTRACT_DELEGATE,
+    ENCAPSULATE_FIELDS,
     UNKNOWN
 }
 

@@ -18,6 +18,7 @@ public class RefactoringTypeFactory {
             case "push.down" -> RefactoringType.PUSH_MEMBERS_DOWN;
             case "makeStatic" -> RefactoringType.MAKE_STATIC;
             case "extract.delegate" -> RefactoringType.EXTRACT_DELEGATE;
+            case "encapsulateFields" -> RefactoringType.ENCAPSULATE_FIELDS;
             default -> RefactoringType.UNKNOWN;
         };
     }
