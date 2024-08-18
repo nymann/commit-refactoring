@@ -1,9 +1,6 @@
 package com.github.nymann.commitrefactoring.messages;
 
-import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.RefactoringService;
-import com.github.nymann.commitrefactoring.RefactoringTestBuilder;
-import com.github.nymann.commitrefactoring.RefactoringType;
+import com.github.nymann.commitrefactoring.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,5 +24,17 @@ public class MakeStaticCommitMessageTest {
         refactoringService.addRefactoring(refactoring);
 
         assertEquals("Make static", refactoringService.getCommitMessage());
+    }
+
+    @Test
+    public void testMakeMethodStatic() {
+        Refactoring refactoring = refactoringTestBuilder
+                .beforeType(CodeElementType.METHOD)
+                .beforeName("foo")
+                .build();
+
+        refactoringService.addRefactoring(refactoring);
+
+        assertEquals("Make method 'foo' static", refactoringService.getCommitMessage());
     }
 }
