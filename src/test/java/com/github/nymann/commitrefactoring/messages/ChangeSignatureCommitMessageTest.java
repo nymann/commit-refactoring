@@ -1,10 +1,7 @@
 package com.github.nymann.commitrefactoring.messages;
 
 
-import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.RefactoringService;
-import com.github.nymann.commitrefactoring.RefactoringTestBuilder;
-import com.github.nymann.commitrefactoring.RefactoringType;
+import com.github.nymann.commitrefactoring.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,11 +18,25 @@ public class ChangeSignatureCommitMessageTest {
     }
 
     @Test
-    public void testGetMessage() {
+    public void testUnknownChangeSignature() {
         Refactoring refactoring = refactoringTestBuilder.build();
 
         refactoringService.addRefactoring(refactoring);
 
         assertEquals("Change signature", refactoringService.getCommitMessage());
+    }
+
+    @Test
+    public void testChangeMethodSignature() {
+        Refactoring refactoring = refactoringTestBuilder
+                .beforeName("foo")
+                .beforeType(CodeElementType.METHOD)
+                .afterName("foo")
+                .afterType(CodeElementType.METHOD)
+                .build();
+
+        refactoringService.addRefactoring(refactoring);
+
+        assertEquals("Change signature of 'foo'", refactoringService.getCommitMessage());
     }
 }

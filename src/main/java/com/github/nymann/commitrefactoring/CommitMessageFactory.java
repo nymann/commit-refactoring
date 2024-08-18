@@ -14,7 +14,7 @@ public class CommitMessageFactory {
 
     public static @NotNull CommitMessage create(Refactoring refactoring) {
         return switch (refactoring.refactoringType()) {
-            case CHANGE_SIGNATURE -> new DefaultChangeSignatureCommitMessage();
+            case CHANGE_SIGNATURE -> ChangeSignatureCommitMessageFactory.create(refactoring);
             case EXTRACT -> ExtractCommitMessageFactory.create(refactoring.after());
             case INLINE -> InlineCommitMessageFactory.create(refactoring.before());
             case MOVE -> MoveCommitMessageFactory.create(refactoring.before(), refactoring.after());
