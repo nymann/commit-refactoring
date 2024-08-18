@@ -37,6 +37,6 @@ public class ChangeSignatureCommitMessageTest {
 
         refactoringService.addRefactoring(refactoring);
 
-        assertEquals("Change signature of 'foo'", refactoringService.getCommitMessage());
+        assertEquals("Change method signature of 'foo'", refactoringService.getCommitMessage());
     }
 }

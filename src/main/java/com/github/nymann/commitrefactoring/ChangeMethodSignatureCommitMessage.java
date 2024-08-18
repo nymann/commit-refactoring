@@ -9,6 +9,6 @@ public class ChangeMethodSignatureCommitMessage implements CommitMessage {
 
     @Override
     public String getMessage() {
-        return "Change signature of '" + methodName + "'";
+        return "Change method signature of '" + methodName + "'";
     }
 }
