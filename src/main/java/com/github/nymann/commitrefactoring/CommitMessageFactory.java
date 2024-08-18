@@ -1,6 +1,7 @@
 package com.github.nymann.commitrefactoring;
 
 import com.github.nymann.commitrefactoring.messages.IntroduceParameterCommitMessage;
+import com.github.nymann.commitrefactoring.messages.changesignature.ChangeSignatureCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.extract.ExtractCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.inline.InlineCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.makestatic.MakeStaticFactory;

@@ -1,6 +1,9 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.messages.changesignature;
 
-import com.github.nymann.commitrefactoring.messages.DefaultChangeSignatureCommitMessage;
+import com.github.nymann.commitrefactoring.CodeElement;
+import com.github.nymann.commitrefactoring.CodeElementType;
+import com.github.nymann.commitrefactoring.CommitMessage;
+import com.github.nymann.commitrefactoring.Refactoring;
 import org.jetbrains.annotations.NotNull;
 
 public class ChangeSignatureCommitMessageFactory {

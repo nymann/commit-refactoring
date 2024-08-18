@@ -1,4 +1,4 @@
-package com.github.nymann.commitrefactoring.messages;
+package com.github.nymann.commitrefactoring.messages.changesignature;
 
 import com.github.nymann.commitrefactoring.CommitMessage;
 

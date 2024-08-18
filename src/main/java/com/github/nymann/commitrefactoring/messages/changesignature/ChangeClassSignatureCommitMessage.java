@@ -1,4 +1,6 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.messages.changesignature;
+
+import com.github.nymann.commitrefactoring.CommitMessage;
 
 public class ChangeClassSignatureCommitMessage implements CommitMessage {
     private final String className;
