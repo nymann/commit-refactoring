@@ -38,11 +38,13 @@ public final class IntelliJRefactoringService {
     }
 
     public void setCommitMessageOnPanel() {
-        if (this.panel == null) {
-            log.error("Tried to set commit message but panel is null");
-        } else {
+        if (usingNonModalCommitEditor()) {
             this.panel.setCommitMessage(getCommitMessage());
         }
+    }
+
+    private boolean usingNonModalCommitEditor() {
+        return this.panel != null;
     }
 
     public void setPanel(CheckinProjectPanel panel) {
