@@ -3,7 +3,6 @@ package com.github.nymann.commitrefactoring.intellij;
 import com.github.nymann.commitrefactoring.Refactoring;
 import com.github.nymann.commitrefactoring.RefactoringService;
 import com.intellij.openapi.components.Service;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vcs.CheckinProjectPanel;
 
 @Service(Service.Level.PROJECT)
