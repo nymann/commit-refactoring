@@ -1,9 +1,7 @@
 package com.github.nymann.commitrefactoring.intellij;
 
-import com.github.nymann.commitrefactoring.Refactoring;
-import com.github.nymann.commitrefactoring.RefactoringProvider;
-import com.github.nymann.commitrefactoring.RefactoringService;
-import com.github.nymann.commitrefactoring.TemplateProcessor;
+import com.github.nymann.commitrefactoring.*;
+import com.github.nymann.commitrefactoring.intellij.providers.IntelliJBranchProvider;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.CheckinProjectPanel;
@@ -21,8 +19,10 @@ public final class IntelliJRefactoringService implements TemplateChangeListener 
         String template = CommitRefactoringSettings
                 .getInstance()
                 .getTemplate();
-        templateProcessor = new TemplateProcessor(template, List.of(new RefactoringProvider()));
+        List<TemplateVariableProvider> providers = List.of(new RefactoringProvider(), new IntelliJBranchProvider(project));
+        templateProcessor = new TemplateProcessor(template, providers);
         this.refactoringService = new RefactoringService(templateProcessor);
+
 
         project
                 .getMessageBus()
