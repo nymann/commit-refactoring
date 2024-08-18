@@ -9,6 +9,6 @@ public enum RefactoringType {
     RENAME,
     SAFE_DELETE,
     UNKNOWN,
-    PUSH_MEMBERS_DOWN,
+    PUSH_MEMBERS_DOWN, MAKE_STATIC,
 }
 

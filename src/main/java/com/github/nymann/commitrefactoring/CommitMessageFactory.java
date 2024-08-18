@@ -22,6 +22,7 @@ public class CommitMessageFactory {
             case SAFE_DELETE -> SafeDeleteCommitMessageFactory.create(refactoring.before());
             case INTRODUCE_PARAMETER -> new IntroduceParameterCommitMessage();
             case PUSH_MEMBERS_DOWN -> PushMembersDownFactory.create(refactoring.before(), refactoring.after());
+            case MAKE_STATIC -> MakeStaticFactory.create(refactoring.before());
             case UNKNOWN -> throw new RuntimeException(refactoring.toString());
         };
     }
