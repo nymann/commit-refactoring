@@ -1,9 +1,11 @@
 package com.github.nymann.commitrefactoring;
 
+import com.github.nymann.commitrefactoring.messages.convertinstancemethod.ConvertToInstanceMethodFactory;
+import com.github.nymann.commitrefactoring.messages.encapsulatefield.EncapsulateFieldsFactory;
+import com.github.nymann.commitrefactoring.messages.extractdelegate.ExtractDelegateCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.IntroduceParameterCommitMessage;
 import com.github.nymann.commitrefactoring.messages.changesignature.ChangeSignatureCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.extract.ExtractCommitMessageFactory;
-import com.github.nymann.commitrefactoring.messages.extractdelegate.DefaultExtractDelegateCommitMessage;
 import com.github.nymann.commitrefactoring.messages.inline.InlineCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.makestatic.MakeStaticFactory;
 import com.github.nymann.commitrefactoring.messages.move.MoveCommitMessageFactory;
@@ -27,6 +29,7 @@ public class CommitMessageFactory {
             case MAKE_STATIC -> MakeStaticFactory.create(refactoring.before());
             case EXTRACT_DELEGATE -> ExtractDelegateCommitMessageFactory.create(refactoring.before(), refactoring.after());
             case ENCAPSULATE_FIELDS -> EncapsulateFieldsFactory.create(refactoring.before(), refactoring.after());
+            case CONVERT_INSTANCE_METHOD -> ConvertToInstanceMethodFactory.create(refactoring.before(), refactoring.after());
             case UNKNOWN -> throw new RuntimeException(refactoring.toString());
         };
     }

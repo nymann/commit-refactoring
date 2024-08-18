@@ -1,7 +1,8 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.messages.extractdelegate;
 
-import com.github.nymann.commitrefactoring.messages.extractdelegate.DefaultExtractDelegateCommitMessage;
-import com.github.nymann.commitrefactoring.messages.extractdelegate.ExtractDelegateClassCommitMessage;
+import com.github.nymann.commitrefactoring.CodeElement;
+import com.github.nymann.commitrefactoring.CodeElementType;
+import com.github.nymann.commitrefactoring.CommitMessage;
 import org.jetbrains.annotations.NotNull;
 
 public class ExtractDelegateCommitMessageFactory {

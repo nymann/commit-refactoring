@@ -1,4 +1,6 @@
-package com.github.nymann.commitrefactoring;
+package com.github.nymann.commitrefactoring.messages.encapsulatefield;
+
+import com.github.nymann.commitrefactoring.CommitMessage;
 
 public class DefaultEncapsulateFieldsMessage implements CommitMessage {
     @Override

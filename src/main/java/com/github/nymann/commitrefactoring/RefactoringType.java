@@ -12,6 +12,8 @@ public enum RefactoringType {
     MAKE_STATIC,
     EXTRACT_DELEGATE,
     ENCAPSULATE_FIELDS,
+    CONVERT_INSTANCE_METHOD,
+    MAKE_INSTANCE,
     UNKNOWN
 }
 
