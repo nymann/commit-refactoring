@@ -8,7 +8,8 @@ public enum RefactoringType {
     MOVE,
     RENAME,
     SAFE_DELETE,
+    PUSH_MEMBERS_DOWN,
+    MAKE_STATIC,
     UNKNOWN,
-    PUSH_MEMBERS_DOWN, MAKE_STATIC,
 }
 
