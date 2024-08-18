@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [0.1.5-beta] - 2024-08-18
+
+Add support for templating #7
+
 ## [0.1.3] - 2024-08-17
 
 ### Added
@@ -70,7 +74,8 @@
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.5-beta...HEAD
+[0.1.5-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.3...v0.1.5-beta
 [0.1.3]: https://github.com/nymann/commit-refactoring/compare/v0.1.3-beta...v0.1.3
 [0.1.3-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.2...v0.1.3-beta
 [0.1.2]: https://github.com/nymann/commit-refactoring/compare/v0.1.2-beta...v0.1.2
