@@ -10,7 +10,7 @@ public class RefactoringTypeFactory {
             case "refactoring.extract.method", "refactoring.extractVariable" -> RefactoringType.EXTRACT;
             case "refactoring.inplace.rename", "refactoring.rename" -> RefactoringType.RENAME;
             case "refactoring.safeDelete" -> RefactoringType.SAFE_DELETE;
-            case "refactoring.changeSignature" -> RefactoringType.CHANGE_SIGNATURE;
+            case "refactoring.changeSignature", "refactoring.changeClassSignature" -> RefactoringType.CHANGE_SIGNATURE;
             case "refactoring.move" -> RefactoringType.MOVE;
             case "refactoring.introduceParameter" -> RefactoringType.INTRODUCE_PARAMETER;
             case "refactoring.push.down" -> RefactoringType.PUSH_MEMBERS_DOWN;

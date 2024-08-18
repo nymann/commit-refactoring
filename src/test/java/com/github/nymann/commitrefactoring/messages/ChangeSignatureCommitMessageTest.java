@@ -39,4 +39,20 @@ public class ChangeSignatureCommitMessageTest {
 
         assertEquals("Change method signature of 'foo'", refactoringService.getCommitMessage());
     }
+
+    @Test
+    public void testChangeClassSignature() {
+        Refactoring refactoring = refactoringTestBuilder
+                .beforeName("Foo")
+                .beforeType(CodeElementType.CLASS)
+                .afterName("Foo")
+                .afterType(CodeElementType.CLASS)
+                .build();
+
+        refactoringService.addRefactoring(refactoring);
+
+        assertEquals("Change class signature of 'Foo'", refactoringService.getCommitMessage());
+
+    }
+
 }

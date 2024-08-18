@@ -9,6 +9,9 @@ public class ChangeSignatureCommitMessageFactory {
         if (CodeElementType.METHOD.equals(before.type())) {
             return new ChangeMethodSignatureCommitMessage(before.name());
         }
+        if(CodeElementType.CLASS.equals(before.type())) {
+            return new ChangeClassSignatureCommitMessage(before.name());
+        }
         return new DefaultChangeSignatureCommitMessage();
     }
 }
