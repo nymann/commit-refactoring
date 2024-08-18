@@ -8,7 +8,6 @@ import com.intellij.openapi.vcs.CheckinProjectPanel;
 
 @Service(Service.Level.PROJECT)
 public final class IntelliJRefactoringService {
-    private static final Logger log = Logger.getInstance(IntelliJRefactoringService.class);
 
     private final RefactoringService refactoringService;
     private CheckinProjectPanel panel;
