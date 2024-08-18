@@ -28,7 +28,6 @@ public class MakeStaticCommitMessageTest {
     }
 
     @Test
-    @Disabled
     public void testMakeMethodStatic() {
         Refactoring refactoring = refactoringTestBuilder
                 .beforeType(CodeElementType.METHOD)
