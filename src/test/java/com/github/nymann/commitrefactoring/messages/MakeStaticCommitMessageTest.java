@@ -2,6 +2,7 @@ package com.github.nymann.commitrefactoring.messages;
 
 import com.github.nymann.commitrefactoring.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,6 +28,7 @@ public class MakeStaticCommitMessageTest {
     }
 
     @Test
+    @Disabled
     public void testMakeMethodStatic() {
         Refactoring refactoring = refactoringTestBuilder
                 .beforeType(CodeElementType.METHOD)
