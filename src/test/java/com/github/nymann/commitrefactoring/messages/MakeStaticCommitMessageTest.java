@@ -38,4 +38,16 @@ public class MakeStaticCommitMessageTest {
 
         assertEquals("Make method 'foo' static", refactoringService.getCommitMessage());
     }
+
+    @Test
+    public void testMakeClassStatic() {
+        Refactoring refactoring = refactoringTestBuilder
+                .beforeType(CodeElementType.CLASS)
+                .beforeName("Foo")
+                .build();
+
+        refactoringService.addRefactoring(refactoring);
+
+        assertEquals("Make class 'Foo' static", refactoringService.getCommitMessage());
+    }
 }

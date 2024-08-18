@@ -11,6 +11,9 @@ public class MakeStaticFactory {
         if(CodeElementType.METHOD.equals(codeElement.type())) {
             return new MakeMethodStaticCommitMessage(codeElement.name());
         }
+        if(CodeElementType.CLASS.equals(codeElement.type())){
+            return new MakeClassStaticCommitMessage(codeElement.name());
+        }
         return new DefaultMakeStaticCommitMessage();
     }
 }
