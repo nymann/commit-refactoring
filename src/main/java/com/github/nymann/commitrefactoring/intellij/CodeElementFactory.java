@@ -2,6 +2,7 @@ package com.github.nymann.commitrefactoring.intellij;
 
 import com.github.nymann.commitrefactoring.CodeElement;
 import com.github.nymann.commitrefactoring.CodeElementType;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.*;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import org.jetbrains.annotations.NotNull;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class CodeElementFactory {
+    private static final Logger logger = Logger.getInstance(CodeElementFactory.class);
 
     public static CodeElement create(PsiElement element) {
         if (element == null) {
@@ -36,9 +38,11 @@ public class CodeElementFactory {
         if (element instanceof PsiCodeBlock psiCodeBlock) {
             return psiCodeBlockFactoryMethod(psiCodeBlock);
         }
-        return new CodeElement(element
+        String unsupportedClassName = element
                 .getClass()
-                .getName(), CodeElementType.UNKNOWN);
+                .getName();
+        logger.warn(unsupportedClassName + " is unsupported");
+        return new CodeElement(unsupportedClassName, CodeElementType.UNKNOWN);
     }
 
     private static @NotNull CodeElement psiMethodFactoryMethod(PsiMethod psiMethod) {
