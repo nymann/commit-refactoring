@@ -17,6 +17,7 @@ public class RefactoringTypeFactory {
             case "introduceParameter" -> RefactoringType.INTRODUCE_PARAMETER;
             case "push.down" -> RefactoringType.PUSH_MEMBERS_DOWN;
             case "makeStatic" -> RefactoringType.MAKE_STATIC;
+            case "extract.delegate" -> RefactoringType.EXTRACT_DELEGATE;
             default -> RefactoringType.UNKNOWN;
         };
     }

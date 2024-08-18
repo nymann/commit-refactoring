@@ -10,6 +10,7 @@ public enum RefactoringType {
     SAFE_DELETE,
     PUSH_MEMBERS_DOWN,
     MAKE_STATIC,
-    UNKNOWN,
+    EXTRACT_DELEGATE,
+    UNKNOWN
 }
 
