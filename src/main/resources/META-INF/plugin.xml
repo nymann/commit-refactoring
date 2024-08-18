@@ -12,6 +12,8 @@
                 implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCommitMessageProvider"/>
         <checkinHandlerFactory
                 implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCheckinHandlerFactory"/>
+        <applicationConfigurable instance="com.github.nymann.commitrefactoring.intellij.CommitRefactoringSettingsUi"
+                                 displayName="Commit Refactoring"/>
     </extensions>
 
     <projectListeners>
