@@ -5,11 +5,21 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class RefactoringService {
     private final List<Refactoring> refactorings = new ArrayList<>();
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
     private final Deque<Refactoring> redoStack = new ArrayDeque<>();
+    private final TemplateProcessor templateProcessor;
+
+    public RefactoringService(TemplateProcessor templateProcessor) {
+        this.templateProcessor = templateProcessor;
+    }
+
+    public RefactoringService() {
+        templateProcessor = new TemplateProcessor();
+    }
 
     public void addRefactoring(Refactoring refactoring) {
         this.refactorings.add(refactoring);
@@ -42,19 +52,9 @@ public final class RefactoringService {
     }
 
     public String getCommitMessage() {
-        if (refactorings.size() == 1) {
-            Refactoring refactoring = refactorings.get(0);
-            return CommitMessageFactory
-                    .create(refactoring)
-                    .getMessage();
-        }
-        StringBuilder result = new StringBuilder();
-        for (Refactoring refactoring : refactorings) {
-            CommitMessage commitMessage = CommitMessageFactory.create(refactoring);
-            result
-                    .append(commitMessage.getMessage())
-                    .append("\n");
-        }
-        return result.toString();
+        return refactorings
+                .stream()
+                .map(templateProcessor::processTemplate)
+                .collect(Collectors.joining("\n"));
     }
 }
