@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [0.1.5] - 2024-08-18
+
+### Added
+
+- Support for non-modal commit editor
+- Support for templating #7
+- Support for various refactorings
+
 ## [0.1.5-beta] - 2024-08-18
 
 Add support for templating #7
@@ -74,7 +82,8 @@ Add support for templating #7
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.5-beta...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/nymann/commit-refactoring/compare/v0.1.5-beta...v0.1.5
 [0.1.5-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.3...v0.1.5-beta
 [0.1.3]: https://github.com/nymann/commit-refactoring/compare/v0.1.3-beta...v0.1.3
 [0.1.3-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.2...v0.1.3-beta
