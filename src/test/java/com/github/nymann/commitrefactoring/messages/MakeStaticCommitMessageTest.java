@@ -21,7 +21,7 @@ public class MakeStaticCommitMessageTest {
     }
 
     @Test
-    public void testUnknownChangeSignature() {
+    public void testUnknownMakeStatic() {
         Refactoring refactoring = refactoringTestBuilder.build();
 
         refactoringService.addRefactoring(refactoring);
