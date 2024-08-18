@@ -25,7 +25,7 @@ public class CommitMessageFactory {
             case INTRODUCE_PARAMETER -> new IntroduceParameterCommitMessage();
             case PUSH_MEMBERS_DOWN -> PushMembersDownFactory.create(refactoring.before(), refactoring.after());
             case MAKE_STATIC -> MakeStaticFactory.create(refactoring.before());
-            case EXTRACT_DELEGATE -> new DefaultExtractDelegateCommitMessage();
+            case EXTRACT_DELEGATE -> ExtractDelegateCommitMessageFactory.create(refactoring.before(), refactoring.after());
             case UNKNOWN -> throw new RuntimeException(refactoring.toString());
         };
     }
