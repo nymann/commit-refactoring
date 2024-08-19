@@ -8,10 +8,7 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.util.messages.Topic;
 import org.jetbrains.annotations.NotNull;
 
-@State(
-        name = "CommitRefactoring",
-        storages = @Storage("CommitRefactoring.xml")
-)
+@State(name = "CommitRefactoring", storages = @Storage("CommitRefactoring.xml"))
 @Service(Service.Level.APP)
 public final class CommitRefactoringSettings implements PersistentStateComponent<CommitRefactoringSettings.State> {
 
