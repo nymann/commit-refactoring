@@ -21,7 +21,7 @@ public final class IntelliJRefactoringService implements TemplateChangeListener 
                 .getTemplate();
         List<TemplateVariableProvider> providers = List.of(new RefactoringProvider(), new IntelliJBranchProvider(project));
         templateProcessor = new TemplateProcessor(template, providers);
-        this.refactoringService = new RefactoringService(templateProcessor);
+        this.refactoringService = new RefactoringService(templateProcessor, "UNSAFE");
 
 
         project

@@ -12,13 +12,16 @@ public final class RefactoringService {
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
     private final Deque<Refactoring> redoStack = new ArrayDeque<>();
     private final TemplateProcessor templateProcessor;
+    private final String defaultMessage;
 
-    public RefactoringService(TemplateProcessor templateProcessor) {
+    public RefactoringService(TemplateProcessor templateProcessor, String defaultMessage) {
         this.templateProcessor = templateProcessor;
+        this.defaultMessage = defaultMessage;
     }
 
     public RefactoringService() {
         templateProcessor = new TemplateProcessor();
+        defaultMessage = "UNSAFE";
     }
 
     public void addRefactoring(Refactoring refactoring) {
@@ -52,9 +55,14 @@ public final class RefactoringService {
     }
 
     public String getCommitMessage() {
-        return refactorings
+        String message = refactorings
                 .stream()
                 .map(templateProcessor::processTemplate)
                 .collect(Collectors.joining("\n"));
+
+        if (message.isEmpty()) {
+            return defaultMessage;
+        }
+        return message;
     }
 }

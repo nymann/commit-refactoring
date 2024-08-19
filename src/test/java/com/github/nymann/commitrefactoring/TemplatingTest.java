@@ -20,7 +20,7 @@ public class TemplatingTest {
     public void testTemplate() {
         List<TemplateVariableProvider> providers = List.of(new RefactoringProvider());
         TemplateProcessor templateProcessor = new TemplateProcessor("TICKET-123: r - ${refactoring}", providers);
-        RefactoringService refactoringService = new RefactoringService(templateProcessor);
+        RefactoringService refactoringService = new RefactoringService(templateProcessor, "UNSAFE");
         Refactoring refactoring = refactoringTestBuilder
                 .beforeName("foo")
                 .beforeType(CodeElementType.LOCAL_VARIABLE)
