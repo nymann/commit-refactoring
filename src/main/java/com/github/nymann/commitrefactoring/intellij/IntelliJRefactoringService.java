@@ -9,28 +9,23 @@ import com.intellij.openapi.vcs.CheckinProjectPanel;
 import java.util.List;
 
 @Service(Service.Level.PROJECT)
-public final class IntelliJRefactoringService implements TemplateChangeListener {
+public final class IntelliJRefactoringService implements SettingsChangeListener {
 
     private final RefactoringService refactoringService;
     private final TemplateProcessor templateProcessor;
     private CheckinProjectPanel panel;
 
     public IntelliJRefactoringService(Project project) {
-        String template = CommitRefactoringSettings
-                .getInstance()
-                .getTemplate();
+        CommitRefactoringSettings settings = CommitRefactoringSettings.getInstance();
+        String template = settings.getTemplate();
         List<TemplateVariableProvider> providers = List.of(new RefactoringProvider(), new IntelliJBranchProvider(project));
         templateProcessor = new TemplateProcessor(template, providers);
-        this.refactoringService = new RefactoringService(templateProcessor, "UNSAFE");
-
+        this.refactoringService = new RefactoringService(templateProcessor, settings.getDefaultCommitMessage());
 
         project
                 .getMessageBus()
                 .connect()
-                .subscribe(
-                        CommitRefactoringSettings.TEMPLATE_CHANGED_TOPIC,
-                        this
-                );
+                .subscribe(CommitRefactoringSettings.SETTINGS_CHANGED_TOPIC, this);
     }
 
     public void addRefactoring(Refactoring refactoring) {
@@ -68,8 +63,11 @@ public final class IntelliJRefactoringService implements TemplateChangeListener 
     }
 
     @Override
-    public void onTemplateChanged(String newTemplate) {
-        this.templateProcessor.setTemplate(newTemplate);
+    public void onSettingsChanged() {
+        CommitRefactoringSettings settings = CommitRefactoringSettings.getInstance();
+        this.templateProcessor.setTemplate(settings.getTemplate());
+        this.refactoringService.setDefaultCommitMessage(settings.getDefaultCommitMessage());
         this.setCommitMessageOnPanel();
+
     }
 }
