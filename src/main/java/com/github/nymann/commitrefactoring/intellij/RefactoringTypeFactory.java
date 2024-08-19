@@ -20,6 +20,7 @@ public class RefactoringTypeFactory {
             case "extract.delegate" -> RefactoringType.EXTRACT_DELEGATE;
             case "encapsulateFields" -> RefactoringType.ENCAPSULATE_FIELDS;
             case "makeInstance" -> RefactoringType.CONVERT_INSTANCE_METHOD;
+            case "pull.up" -> RefactoringType.PULL_MEMBERS_UP;
             default -> RefactoringType.UNKNOWN;
         };
     }
