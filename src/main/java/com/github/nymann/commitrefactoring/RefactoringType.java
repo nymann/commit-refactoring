@@ -13,7 +13,6 @@ public enum RefactoringType {
     EXTRACT_DELEGATE,
     ENCAPSULATE_FIELDS,
     CONVERT_INSTANCE_METHOD,
-    MAKE_INSTANCE,
     UNKNOWN
 }
 
