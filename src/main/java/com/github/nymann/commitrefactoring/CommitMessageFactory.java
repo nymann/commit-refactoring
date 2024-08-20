@@ -9,6 +9,7 @@ import com.github.nymann.commitrefactoring.messages.extractdelegate.ExtractDeleg
 import com.github.nymann.commitrefactoring.messages.inline.InlineCommitMessageFactory;
 import com.github.nymann.commitrefactoring.messages.makestatic.MakeStaticFactory;
 import com.github.nymann.commitrefactoring.messages.move.MoveCommitMessageFactory;
+import com.github.nymann.commitrefactoring.messages.move.MoveMembersCommitMessage;
 import com.github.nymann.commitrefactoring.messages.pullmembersup.PullMembersUpFactory;
 import com.github.nymann.commitrefactoring.messages.pushmembersdown.PushMembersDownFactory;
 import com.github.nymann.commitrefactoring.messages.rename.RenameCommitMessageFactory;
@@ -28,10 +29,13 @@ public class CommitMessageFactory {
             case INTRODUCE_PARAMETER -> new IntroduceParameterCommitMessage();
             case PUSH_MEMBERS_DOWN -> PushMembersDownFactory.create(refactoring.before(), refactoring.after());
             case MAKE_STATIC -> MakeStaticFactory.create(refactoring.before());
-            case EXTRACT_DELEGATE -> ExtractDelegateCommitMessageFactory.create(refactoring.before(), refactoring.after());
+            case EXTRACT_DELEGATE ->
+                    ExtractDelegateCommitMessageFactory.create(refactoring.before(), refactoring.after());
             case ENCAPSULATE_FIELDS -> EncapsulateFieldsFactory.create(refactoring.before(), refactoring.after());
-            case CONVERT_INSTANCE_METHOD -> ConvertToInstanceMethodFactory.create(refactoring.before(), refactoring.after());
+            case CONVERT_INSTANCE_METHOD ->
+                    ConvertToInstanceMethodFactory.create(refactoring.before(), refactoring.after());
             case PULL_MEMBERS_UP -> PullMembersUpFactory.create(refactoring.after());
+            case MOVE_MEMBERS -> new MoveMembersCommitMessage();
             case UNKNOWN -> throw new RuntimeException(refactoring.toString());
         };
     }
