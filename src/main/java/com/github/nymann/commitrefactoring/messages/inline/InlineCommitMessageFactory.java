@@ -12,6 +12,7 @@ public class InlineCommitMessageFactory {
             case CONSTRUCTOR -> new InlineConstructorCommitMessage(before.name());
             case CLASS -> new InlineClassCommitMessage(before.name());
             case PARAMETER -> new InlineParameterCommitMessage(before.name());
+            case FIELD -> new InlineFieldCommitMessage(before.name());
             default -> new DefaultInlineCommitMessage(before.type());
         };
     }

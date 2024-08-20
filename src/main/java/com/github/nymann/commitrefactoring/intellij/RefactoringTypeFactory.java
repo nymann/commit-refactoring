@@ -8,7 +8,7 @@ public class RefactoringTypeFactory {
         String id = refactoringId.replaceFirst("refactoring.", "");
         return switch (id) {
             case "inline.method", "inline.local.variable", "inline.class",
-                 "inline.parameter" -> RefactoringType.INLINE;
+                 "inline.parameter", "inline.field" -> RefactoringType.INLINE;
             case "extract.method", "extractVariable" -> RefactoringType.EXTRACT;
             case "inplace.rename", "rename" -> RefactoringType.RENAME;
             case "safeDelete" -> RefactoringType.SAFE_DELETE;
@@ -21,6 +21,7 @@ public class RefactoringTypeFactory {
             case "encapsulateFields" -> RefactoringType.ENCAPSULATE_FIELDS;
             case "makeInstance" -> RefactoringType.CONVERT_INSTANCE_METHOD;
             case "pull.up" -> RefactoringType.PULL_MEMBERS_UP;
+            case "move.members", "moveMembers" -> RefactoringType.MOVE_MEMBERS;
             default -> RefactoringType.UNKNOWN;
         };
     }

@@ -74,6 +74,17 @@ public class InlineCommitMessageTest {
     }
 
     @Test
+    public void testInlineField() {
+        Refactoring refactoring = refactoringTestBuilder
+                .beforeType(CodeElementType.FIELD)
+                .beforeName("test")
+                .build();
+
+        refactoringService.addRefactoring(refactoring);
+
+        assertEquals("Inline field 'test'", refactoringService.getCommitMessage());
+    }
+    @Test
     public void testInlineVariable() {
         Refactoring refactoring = refactoringTestBuilder
                 .beforeType(CodeElementType.LOCAL_VARIABLE)
