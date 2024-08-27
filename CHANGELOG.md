@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [0.1.6] - 2024-08-25
+
+### Added
+
+- Support for inline field
+- Basic support for move members
+- Default commit message setting in the UI
+
 ## [0.1.6-beta] - 2024-08-20
 
 ### Added
@@ -90,7 +98,8 @@ Add support for templating #7
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.6-beta...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/nymann/commit-refactoring/compare/v0.1.6-beta...v0.1.6
 [0.1.6-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.5...v0.1.6-beta
 [0.1.5]: https://github.com/nymann/commit-refactoring/compare/v0.1.5-beta...v0.1.5
 [0.1.5-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.3...v0.1.5-beta
