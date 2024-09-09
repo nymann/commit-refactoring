@@ -12,16 +12,16 @@ public final class RefactoringService {
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
     private final Deque<Refactoring> redoStack = new ArrayDeque<>();
     private final TemplateProcessor refactoringMessageTemplate;
-    private String defaultCommitMessage;
+    private String defaultMessageTemplate;
 
-    public RefactoringService(TemplateProcessor refactoringMessageTemplate, String defaultCommitMessage) {
+    public RefactoringService(TemplateProcessor refactoringMessageTemplate, String defaultMessageTemplate) {
         this.refactoringMessageTemplate = refactoringMessageTemplate;
-        this.defaultCommitMessage = defaultCommitMessage;
+        this.defaultMessageTemplate = defaultMessageTemplate;
     }
 
     public RefactoringService() {
         refactoringMessageTemplate = new TemplateProcessor();
-        defaultCommitMessage = "UNSAFE";
+        defaultMessageTemplate = "UNSAFE";
     }
 
     public void addRefactoring(Refactoring refactoring) {
@@ -61,12 +61,12 @@ public final class RefactoringService {
                 .collect(Collectors.joining("\n"));
 
         if (message.isEmpty()) {
-            return defaultCommitMessage;
+            return defaultMessageTemplate;
         }
         return message;
     }
 
     public void setDefaultCommitMessage(String defaultCommitMessage) {
-        this.defaultCommitMessage = defaultCommitMessage;
+        this.defaultMessageTemplate = defaultCommitMessage;
     }
 }
