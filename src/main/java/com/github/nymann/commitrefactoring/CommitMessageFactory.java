@@ -36,6 +36,7 @@ public class CommitMessageFactory {
                     ConvertToInstanceMethodFactory.create(refactoring.before(), refactoring.after());
             case PULL_MEMBERS_UP -> PullMembersUpFactory.create(refactoring.after());
             case MOVE_MEMBERS -> new MoveMembersCommitMessage();
+            case NO_REFACTORING -> () -> "";
             case UNKNOWN -> throw new RuntimeException(refactoring.toString());
         };
     }

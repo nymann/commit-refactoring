@@ -15,6 +15,7 @@ public enum RefactoringType {
     CONVERT_INSTANCE_METHOD,
     MOVE_MEMBERS,
     PULL_MEMBERS_UP,
+    NO_REFACTORING,
     UNKNOWN
 }
 

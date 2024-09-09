@@ -7,21 +7,24 @@ import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.github.nymann.commitrefactoring.CodeElementType.UNKNOWN;
+import static com.github.nymann.commitrefactoring.RefactoringType.NO_REFACTORING;
+
 public final class RefactoringService {
     private final List<Refactoring> refactorings = new ArrayList<>();
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
     private final Deque<Refactoring> redoStack = new ArrayDeque<>();
     private final TemplateProcessor refactoringMessageTemplate;
-    private String defaultMessageTemplate;
+    private final TemplateProcessor defaultMessageTemplate;
 
-    public RefactoringService(TemplateProcessor refactoringMessageTemplate, String defaultMessageTemplate) {
+    public RefactoringService(TemplateProcessor refactoringMessageTemplate, TemplateProcessor defaultMessageTemplate) {
         this.refactoringMessageTemplate = refactoringMessageTemplate;
         this.defaultMessageTemplate = defaultMessageTemplate;
     }
 
     public RefactoringService() {
         refactoringMessageTemplate = new TemplateProcessor();
-        defaultMessageTemplate = "UNSAFE";
+        defaultMessageTemplate = new TemplateProcessor();
     }
 
     public void addRefactoring(Refactoring refactoring) {
@@ -61,12 +64,11 @@ public final class RefactoringService {
                 .collect(Collectors.joining("\n"));
 
         if (message.isEmpty()) {
-            return defaultMessageTemplate;
+            return defaultMessageTemplate.processTemplate(new Refactoring(
+                    NO_REFACTORING,
+                    new CodeElement("N/A", UNKNOWN),
+                    new CodeElement("N/A", UNKNOWN)));
         }
         return message;
-    }
-
-    public void setDefaultCommitMessage(String defaultCommitMessage) {
-        this.defaultMessageTemplate = defaultCommitMessage;
     }
 }
