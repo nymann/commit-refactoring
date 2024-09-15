@@ -12,15 +12,16 @@ import java.util.List;
 public final class IntelliJRefactoringService implements SettingsChangeListener {
 
     private final RefactoringService refactoringService;
-    private final TemplateProcessor templateProcessor;
+    private final TemplateProcessor refactoringMessageTemplate;
+    private final TemplateProcessor defaultMessageTemplate;
     private CheckinProjectPanel panel;
 
     public IntelliJRefactoringService(Project project) {
         CommitRefactoringSettings settings = CommitRefactoringSettings.getInstance();
-        String template = settings.getTemplate();
-        List<TemplateVariableProvider> providers = List.of(new RefactoringProvider(), new IntelliJBranchProvider(project));
-        templateProcessor = new TemplateProcessor(template, providers);
-        this.refactoringService = new RefactoringService(templateProcessor, settings.getDefaultCommitMessage());
+		List<TemplateVariableProvider> providers = List.of(new RefactoringProvider(), new IntelliJBranchProvider(project));
+        refactoringMessageTemplate = new TemplateProcessor(settings.getTemplate(), providers);
+        defaultMessageTemplate = new TemplateProcessor(settings.getDefaultCommitMessage(), providers);
+        this.refactoringService = new RefactoringService(refactoringMessageTemplate, defaultMessageTemplate);
 
         project
                 .getMessageBus()
@@ -65,9 +66,8 @@ public final class IntelliJRefactoringService implements SettingsChangeListener 
     @Override
     public void onSettingsChanged() {
         CommitRefactoringSettings settings = CommitRefactoringSettings.getInstance();
-        this.templateProcessor.setTemplate(settings.getTemplate());
-        this.refactoringService.setDefaultCommitMessage(settings.getDefaultCommitMessage());
+        this.refactoringMessageTemplate.setTemplate(settings.getTemplate());
+        this.defaultMessageTemplate.setTemplate(settings.getDefaultCommitMessage());
         this.setCommitMessageOnPanel();
-
     }
 }

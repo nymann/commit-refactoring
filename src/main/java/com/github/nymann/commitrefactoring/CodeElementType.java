@@ -7,5 +7,7 @@ public enum CodeElementType {
     LOCAL_VARIABLE,
     METHOD,
     PACKAGE,
-    CODE_BLOCK, CONSTRUCTOR, PARAMETER
+    CODE_BLOCK,
+    CONSTRUCTOR,
+    PARAMETER
 }

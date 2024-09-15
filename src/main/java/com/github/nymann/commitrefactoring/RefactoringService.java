@@ -7,21 +7,24 @@ import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.github.nymann.commitrefactoring.CodeElementType.UNKNOWN;
+import static com.github.nymann.commitrefactoring.RefactoringType.NO_REFACTORING;
+
 public final class RefactoringService {
     private final List<Refactoring> refactorings = new ArrayList<>();
     private final Deque<Refactoring> undoStack = new ArrayDeque<>();
     private final Deque<Refactoring> redoStack = new ArrayDeque<>();
-    private final TemplateProcessor templateProcessor;
-    private String defaultCommitMessage;
+    private final TemplateProcessor refactoringMessageTemplate;
+    private final TemplateProcessor defaultMessageTemplate;
 
-    public RefactoringService(TemplateProcessor templateProcessor, String defaultCommitMessage) {
-        this.templateProcessor = templateProcessor;
-        this.defaultCommitMessage = defaultCommitMessage;
+    public RefactoringService(TemplateProcessor refactoringMessageTemplate, TemplateProcessor defaultMessageTemplate) {
+        this.refactoringMessageTemplate = refactoringMessageTemplate;
+        this.defaultMessageTemplate = defaultMessageTemplate;
     }
 
     public RefactoringService() {
-        templateProcessor = new TemplateProcessor();
-        defaultCommitMessage = "UNSAFE";
+        refactoringMessageTemplate = new TemplateProcessor();
+        defaultMessageTemplate = new TemplateProcessor();
     }
 
     public void addRefactoring(Refactoring refactoring) {
@@ -57,16 +60,15 @@ public final class RefactoringService {
     public String getCommitMessage() {
         String message = refactorings
                 .stream()
-                .map(templateProcessor::processTemplate)
+                .map(refactoringMessageTemplate::processTemplate)
                 .collect(Collectors.joining("\n"));
 
         if (message.isEmpty()) {
-            return defaultCommitMessage;
+            return defaultMessageTemplate.processTemplate(new Refactoring(
+                    NO_REFACTORING,
+                    new CodeElement("N/A", UNKNOWN),
+                    new CodeElement("N/A", UNKNOWN)));
         }
         return message;
-    }
-
-    public void setDefaultCommitMessage(String defaultCommitMessage) {
-        this.defaultCommitMessage = defaultCommitMessage;
     }
 }
