@@ -10,7 +10,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
-                implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCommitMessageProvider"/>
+                implementation="com.github.nymann.commitrefactoring.intellij.extensions.ModalEditorCommitMessageProvider"/>
         <checkinHandlerFactory
                 implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCheckinHandlerFactory"/>
         <applicationConfigurable instance="com.github.nymann.commitrefactoring.intellij.CommitRefactoringSettingsUi"

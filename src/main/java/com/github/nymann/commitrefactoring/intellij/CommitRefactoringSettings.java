@@ -30,6 +30,8 @@ public final class CommitRefactoringSettings implements PersistentStateComponent
     @Override
     public void loadState(@NotNull State state) {
         this.state.template = state.template;
+        this.state.commitMessageViaButtonOnly = state.commitMessageViaButtonOnly;
+        this.state.defaultCommitMessage = state.defaultCommitMessage;
     }
 
     public String getTemplate() {
@@ -50,6 +52,15 @@ public final class CommitRefactoringSettings implements PersistentStateComponent
         notifySettingsChanged();
     }
 
+    public boolean getCommitMessageViaButtonOnly() {
+        return state.commitMessageViaButtonOnly;
+    }
+
+    public void setCommitMessageViaButtonOnly(boolean selected) {
+        state.commitMessageViaButtonOnly = selected;
+        notifySettingsChanged();
+    }
+
     private void notifySettingsChanged() {
         ApplicationManager
                 .getApplication()
@@ -59,6 +70,7 @@ public final class CommitRefactoringSettings implements PersistentStateComponent
     }
 
     public static class State {
+        public boolean commitMessageViaButtonOnly = false;
         public String template = "${refactoring}";
         public String defaultCommitMessage = "UNSAFE";
     }

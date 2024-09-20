@@ -12,6 +12,7 @@ public class CommitRefactoringSettingsUi implements Configurable {
     private JPanel panel;
     private JTextField templateField;
     private JTextField defaultCommitMessage;
+    private JCheckBox commitMessageViaButtonOnly;
 
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
@@ -27,6 +28,7 @@ public class CommitRefactoringSettingsUi implements Configurable {
         panel.add(resetButtonRow());
         panel.add(templateRow());
         panel.add(defaultMessage());
+        panel.add(commitMessageViaButtonOnlyRow());
 
         reset();
         return panel;
@@ -44,6 +46,7 @@ public class CommitRefactoringSettingsUi implements Configurable {
         inputPanel.add(defaultCommitMessage);
         return inputPanel;
     }
+
 
     private @NotNull JPanel resetButtonRow() {
         JButton resetButton = new JButton("Reset");
@@ -67,8 +70,23 @@ public class CommitRefactoringSettingsUi implements Configurable {
         return inputPanel;
     }
 
+    private @NotNull JPanel commitMessageViaButtonOnlyRow() {
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
+        JLabel label = new JLabel("Set commit message via button only:");
+        commitMessageViaButtonOnly = new JCheckBox();
+        commitMessageViaButtonOnly.setMaximumSize(new Dimension(Integer.MAX_VALUE, templateField.getPreferredSize().height));
+
+        inputPanel.add(label);
+        inputPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        inputPanel.add(commitMessageViaButtonOnly);
+        return inputPanel;
+    }
+
     public void resetToDefault() {
         templateField.setText("${refactoring}");
+        defaultCommitMessage.setText("UNSAFE");
+        commitMessageViaButtonOnly.setSelected(false);
     }
 
     @Override
@@ -82,7 +100,9 @@ public class CommitRefactoringSettingsUi implements Configurable {
         boolean defaultCommitMessageHasChanged = !defaultCommitMessage
                 .getText()
                 .equals(settings.getDefaultCommitMessage());
-        return templateHasChanged || defaultCommitMessageHasChanged;
+
+        boolean commitMessageViaButtonOnlyHasChanged = commitMessageViaButtonOnly.isSelected() != settings.getCommitMessageViaButtonOnly();
+        return templateHasChanged || defaultCommitMessageHasChanged || commitMessageViaButtonOnlyHasChanged;
     }
 
     @Override
@@ -90,6 +110,7 @@ public class CommitRefactoringSettingsUi implements Configurable {
         CommitRefactoringSettings instance = CommitRefactoringSettings.getInstance();
         instance.setTemplate(templateField.getText());
         instance.setDefaultCommitMessage(defaultCommitMessage.getText());
+        instance.setCommitMessageViaButtonOnly(commitMessageViaButtonOnly.isSelected());
     }
 
     @Override
@@ -97,6 +118,7 @@ public class CommitRefactoringSettingsUi implements Configurable {
         CommitRefactoringSettings settings = CommitRefactoringSettings.getInstance();
         templateField.setText(settings.getTemplate());
         defaultCommitMessage.setText(settings.getDefaultCommitMessage());
+        commitMessageViaButtonOnly.setSelected(settings.getCommitMessageViaButtonOnly());
     }
 
     @Override
@@ -104,5 +126,6 @@ public class CommitRefactoringSettingsUi implements Configurable {
         panel = null;
         templateField = null;
         defaultCommitMessage = null;
+        commitMessageViaButtonOnly = null;
     }
 }
