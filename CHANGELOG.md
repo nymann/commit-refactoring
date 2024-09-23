@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [0.1.7-eap] - 2024-09-20
+
+Release for EAP
+
 ## [0.1.6] - 2024-08-25
 
 ### Added
@@ -98,7 +102,8 @@ Add support for templating #7
 
 Automatic deployment via GitHub actions
 
-[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/nymann/commit-refactoring/compare/v0.1.7-eap...HEAD
+[0.1.7-eap]: https://github.com/nymann/commit-refactoring/compare/v0.1.6...v0.1.7-eap
 [0.1.6]: https://github.com/nymann/commit-refactoring/compare/v0.1.6-beta...v0.1.6
 [0.1.6-beta]: https://github.com/nymann/commit-refactoring/compare/v0.1.5...v0.1.6-beta
 [0.1.5]: https://github.com/nymann/commit-refactoring/compare/v0.1.5-beta...v0.1.5
