@@ -8,7 +8,7 @@
     <depends>Git4Idea</depends>
     <extensionPoints>
         <extensionPoint name="codeElementProvider"
-                        interface="com.github.nymann.commitrefactoring.CodeElementProvider"
+                        interface="com.github.nymann.commitrefactoring.adapter.in.intellij.CodeElementProvider"
                         dynamic="true"
         />
     </extensionPoints>
@@ -18,20 +18,20 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
-                implementation="com.github.nymann.commitrefactoring.intellij.extensions.ModalEditorCommitMessageProvider"/>
+                implementation="com.github.nymann.commitrefactoring.adapter.in.intellij.extensions.ModalEditorCommitMessageProvider"/>
         <checkinHandlerFactory
-                implementation="com.github.nymann.commitrefactoring.intellij.extensions.RefactoringCheckinHandlerFactory"/>
-        <applicationConfigurable instance="com.github.nymann.commitrefactoring.intellij.CommitRefactoringSettingsUi"
+                implementation="com.github.nymann.commitrefactoring.adapter.in.intellij.extensions.RefactoringCheckinHandlerFactory"/>
+        <applicationConfigurable instance="com.github.nymann.commitrefactoring.adapter.in.intellij.CommitRefactoringSettingsUi"
                                  displayName="Commit Refactoring"/>
     </extensions>
 
     <projectListeners>
-        <listener class="com.github.nymann.commitrefactoring.RefactoringListener"
+        <listener class="com.github.nymann.commitrefactoring.adapter.in.intellij.RefactoringListener"
                   topic="com.intellij.refactoring.listeners.RefactoringEventListener"/>
     </projectListeners>
     <actions>
         <action id="action.PluginAction"
-                class="com.github.nymann.commitrefactoring.intellij.actions.UpdateCommitMessageViaButton"
+                class="com.github.nymann.commitrefactoring.adapter.in.intellij.actions.UpdateCommitMessageViaButton"
                 text="commit-refactoring"
                 description="Sets the commit message based on refactorings"
         >

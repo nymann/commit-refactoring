@@ -1,5 +1,5 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.github.nymann.commitrefactoring">
-        <codeElementProvider implementation="com.github.nymann.commitrefactoring.IntellijCodeElementProvider"/>
+        <codeElementProvider implementation="com.github.nymann.commitrefactoring.adapter.in.intellij.java.IntellijCodeElementProvider"/>
     </extensions>
 </idea-plugin>
