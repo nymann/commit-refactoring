@@ -1,21 +1,10 @@
 package com.github.nymann.commitrefactoring.application;
 
-import com.github.nymann.commitrefactoring.domain.CodeElement;
 import com.github.nymann.commitrefactoring.domain.Refactoring;
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.github.nymann.commitrefactoring.domain.CodeElementType.UNKNOWN;
-import static com.github.nymann.commitrefactoring.domain.RefactoringType.NO_REFACTORING;
+import com.github.nymann.commitrefactoring.domain.RefactoringHistory;
 
 public final class RefactoringService {
-    private final List<Refactoring> refactorings = new ArrayList<>();
-    private final Deque<Refactoring> undoStack = new ArrayDeque<>();
-    private final Deque<Refactoring> redoStack = new ArrayDeque<>();
+    private final RefactoringHistory history = new RefactoringHistory();
     private final TemplateProcessor refactoringMessageTemplate;
     private final TemplateProcessor defaultMessageTemplate;
     private String textToAppendToCommit;
@@ -39,33 +28,19 @@ public final class RefactoringService {
     }
 
     public void addRefactoring(Refactoring refactoring) {
-        this.refactorings.add(refactoring);
-        undoStack.push(refactoring);
-        redoStack.clear();
+        history.add(refactoring);
     }
 
     public void clearRefactorings() {
-        refactorings.clear();
+        history.clear();
     }
 
     public void undoLastRefactoring() {
-        if (undoStack.isEmpty()) {
-            return;
-        }
-        if (refactorings.isEmpty()) {
-            return;
-        }
-        Refactoring lastRefactoring = undoStack.pop();
-        refactorings.remove(lastRefactoring);
-        redoStack.push(lastRefactoring);
+        history.undo();
     }
 
     public void redoLastRefactoring() {
-        if (!redoStack.isEmpty()) {
-            Refactoring refactoring = redoStack.pop();
-            refactorings.add(refactoring);
-            undoStack.push(refactoring);
-        }
+        history.redo();
     }
 
     public String getCommitMessage() {
@@ -76,18 +51,9 @@ public final class RefactoringService {
     }
 
     private String getRefactoringCommitMessage() {
-        String message = refactorings
-                .stream()
-                .map(refactoringMessageTemplate::processTemplate)
-                .collect(Collectors.joining("\n"));
-
-        if (message.isEmpty()) {
-            return defaultMessageTemplate.processTemplate(new Refactoring(
-                    NO_REFACTORING,
-                    new CodeElement("N/A", UNKNOWN),
-                    new CodeElement("N/A", UNKNOWN)));
-        }
-        return message;
+        return history.composeMessage(
+                refactoringMessageTemplate::processTemplate,
+                () -> defaultMessageTemplate.processTemplate(Refactoring.none()));
     }
 
     public void setTextToAppendToCommit(String textToAppendToCommit) {

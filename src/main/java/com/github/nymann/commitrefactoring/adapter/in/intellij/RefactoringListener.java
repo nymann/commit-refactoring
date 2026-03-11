@@ -29,7 +29,7 @@ public class RefactoringListener implements RefactoringEventListener {
         CodeElement after = CodeElementFactory.create(refactoringEventData);
         RefactoringType refactoringType = RefactoringTypeFactory.fromIntellij(refactoringId);
         Refactoring refactoring = new Refactoring(refactoringType, before, after);
-        if (RefactoringType.UNKNOWN.equals(refactoringType)) {
+        if (!refactoring.isSupported()) {
             logger.warn("UNSUPPORTED: " + refactoringId + ": " + refactoring);
             return;
         }
