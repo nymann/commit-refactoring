@@ -1,6 +1,7 @@
 package com.github.nymann.commitrefactoring.intellij;
 
 import com.github.nymann.commitrefactoring.*;
+import com.github.nymann.commitrefactoring.intellij.providers.IntelliJBranchNumberProvider;
 import com.github.nymann.commitrefactoring.intellij.providers.IntelliJBranchProvider;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
@@ -19,10 +20,16 @@ public final class IntelliJRefactoringService implements SettingsChangeListener 
 
     public IntelliJRefactoringService(Project project) {
         CommitRefactoringSettings settings = CommitRefactoringSettings.getInstance();
-        List<TemplateVariableProvider> providers = List.of(new RefactoringProvider(), new IntelliJBranchProvider(project));
+        List<TemplateVariableProvider> providers = List.of(
+                new RefactoringProvider(),
+                new IntelliJBranchProvider(project),
+                new IntelliJBranchNumberProvider(project));
         refactoringMessageTemplate = new TemplateProcessor(settings.getTemplate(), providers);
         defaultMessageTemplate = new TemplateProcessor(settings.getDefaultCommitMessage(), providers);
-        this.refactoringService = new RefactoringService(refactoringMessageTemplate, defaultMessageTemplate, settings.getTextToAppendToCommit());
+        this.refactoringService = new RefactoringService(
+                refactoringMessageTemplate,
+                defaultMessageTemplate,
+                settings.getTextToAppendToCommit());
         commitMessageViaButtonOnly = settings.getCommitMessageViaButtonOnly();
 
         project

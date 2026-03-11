@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import static java.util.Optional.ofNullable;
+
 public class IntellijCodeElementProvider implements CodeElementProvider {
     private static final Logger logger = Logger.getInstance(IntellijCodeElementProvider.class);
 
@@ -69,11 +71,11 @@ public class IntellijCodeElementProvider implements CodeElementProvider {
         if (element instanceof PsiCodeBlock psiCodeBlock) {
             return psiCodeBlockFactoryMethod(psiCodeBlock);
         }
-        String unsupportedClassName = element
-                .getClass()
-                .getName();
+        String unsupportedClassName = ofNullable(element)
+                .map(Object::getClass)
+                .map(Class::getName)
+                .orElse("null");
         logger.warn(unsupportedClassName + " is unsupported");
         return new CodeElement(unsupportedClassName, CodeElementType.UNKNOWN);
     }
-
 }

@@ -9,14 +9,12 @@ public class PsiElementFactory {
             return null;
         }
         PsiElement psiElement = refactoringEventData
-                .get()
-                .get(RefactoringEventData.PSI_ELEMENT_KEY);
+                .getUserData(RefactoringEventData.PSI_ELEMENT_KEY);
         if (psiElement != null) {
             return psiElement;
         }
         PsiElement[] psiElements = refactoringEventData
-                .get()
-                .get(RefactoringEventData.PSI_ELEMENT_ARRAY_KEY);
+                .getUserData(RefactoringEventData.PSI_ELEMENT_ARRAY_KEY);
         if (psiElements != null) {
             for (PsiElement element : psiElements) {
                 return element;
