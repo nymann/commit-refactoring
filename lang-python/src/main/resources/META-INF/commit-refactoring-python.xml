@@ -1,0 +1,6 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.github.nymann.commitrefactoring">
+        <codeElementProvider implementation="com.github.nymann.commitrefactoring.adapter.in.intellij.python.PythonCodeElementProvider"/>
+        <refactoringTypeProvider implementation="com.github.nymann.commitrefactoring.adapter.in.intellij.python.PythonRefactoringTypeProvider"/>
+    </extensions>
+</idea-plugin>

@@ -33,6 +33,7 @@ public class RefactoringListener implements RefactoringEventListener {
             logger.warn("UNSUPPORTED: " + refactoringId + ": " + refactoring);
             return;
         }
+        logger.info("Captured: " + refactoringId + ": " + refactoring);
         refactoringService.addRefactoring(refactoring);
         refactoringService.setCommitMessageOnPanel();
     }

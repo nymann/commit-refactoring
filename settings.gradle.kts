@@ -3,3 +3,7 @@ plugins {
 }
 
 rootProject.name = "commit-refactoring"
+
+include(":core")
+include(":lang-java")
+include(":lang-python")

@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: 17
+          java-version: 21
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -72,7 +72,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: 17
+          java-version: 21
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -87,7 +87,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tests-result
-          path: ${{ github.workspace }}/build/reports/tests
+          path: |
+            ${{ github.workspace }}/build/reports/tests
+            ${{ github.workspace }}/core/build/reports/tests
+            ${{ github.workspace }}/lang-java/build/reports/tests
+            ${{ github.workspace }}/lang-python/build/reports/tests
 
 
   # Prepare a draft release for GitHub Releases page for the manual verification

@@ -16,10 +16,18 @@ public class CodeElementFactory {
         if (eventData == null) {
             return new CodeElement("UNKNOWN", CodeElementType.UNKNOWN);
         }
-        logger.info("Number of extensions: " + EP_NAME.getExtensions().length);
+        CodeElement lastResult = null;
         for (CodeElementProvider provider : EP_NAME.getExtensions()) {
-            return provider.create(eventData);
+            CodeElement result = provider.create(eventData);
+            if (result.type() != CodeElementType.UNKNOWN) {
+                return result;
+            }
+            lastResult = result;
         }
-        throw new RuntimeException("No providers available");
+        if (lastResult != null) {
+            return lastResult;
+        }
+        logger.warn("No CodeElementProviders registered");
+        return new CodeElement("UNKNOWN", CodeElementType.UNKNOWN);
     }
 }

@@ -11,10 +11,14 @@
                         interface="com.github.nymann.commitrefactoring.adapter.in.intellij.CodeElementProvider"
                         dynamic="true"
         />
+        <extensionPoint name="refactoringTypeProvider"
+                        interface="com.github.nymann.commitrefactoring.adapter.in.intellij.RefactoringTypeProvider"
+                        dynamic="true"
+        />
     </extensionPoints>
 
     <depends optional="true" config-file="commit-refactoring-intellij.xml">com.intellij.modules.java</depends>
-    <!--<depends optional="true" config-file="commit-refactoring-goland.xml">org.jetbrains.plugins.go</depends>-->
+    <depends optional="true" config-file="commit-refactoring-python.xml">PythonCore</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
