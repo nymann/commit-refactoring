@@ -19,7 +19,7 @@ java {
 dependencies {
     testRuntimeOnly("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
-    testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
 
     intellijPlatform {
         intellijIdea(providers.gradleProperty("platformVersion"))
