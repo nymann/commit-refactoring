@@ -15,10 +15,8 @@ public class PsiElementFactory {
         }
         PsiElement[] psiElements = refactoringEventData
                 .getUserData(RefactoringEventData.PSI_ELEMENT_ARRAY_KEY);
-        if (psiElements != null) {
-            for (PsiElement element : psiElements) {
-                return element;
-            }
+        if (psiElements != null && psiElements.length > 0) {
+            return psiElements[0];
         }
         return null;
     }

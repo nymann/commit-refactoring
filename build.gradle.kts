@@ -111,6 +111,11 @@ intellijPlatformTesting {
         register("runIdeWithPython") {
             type = org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.PyCharmProfessional
             version = providers.gradleProperty("platformVersion")
+            task {
+                jvmArgumentProviders += CommandLineArgumentProvider {
+                    listOf("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005")
+                }
+            }
         }
 
         register("runIdeForUiTests") {

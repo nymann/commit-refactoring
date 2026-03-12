@@ -9,9 +9,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import com.jetbrains.python.psi.PyAssignmentStatement;
+import com.jetbrains.python.psi.PyCallExpression;
 import com.jetbrains.python.psi.PyClass;
+import com.jetbrains.python.psi.PyExpressionStatement;
 import com.jetbrains.python.psi.PyFunction;
 import com.jetbrains.python.psi.PyNamedParameter;
+import com.jetbrains.python.psi.PyReferenceExpression;
 import com.jetbrains.python.psi.PyTargetExpression;
 
 import static java.util.Optional.ofNullable;
@@ -39,6 +42,17 @@ public class PythonCodeElementProvider implements CodeElementProvider {
             }
             String name = assignment.getTargets().length > 0 ? assignment.getTargets()[0].getText() : "unknown";
             return new CodeElement(name, CodeElementType.LOCAL_VARIABLE);
+        }
+        if (element instanceof PyExpressionStatement exprStmt) {
+            var expr = exprStmt.getExpression();
+            if (expr instanceof PyCallExpression call
+                    && call.getCallee() instanceof PyReferenceExpression ref) {
+                return new CodeElement(ref.getName(), CodeElementType.METHOD);
+            }
+            if (expr instanceof PyReferenceExpression ref) {
+                return new CodeElement(ref.getName(), CodeElementType.METHOD);
+            }
+            return new CodeElement(expr.getText(), CodeElementType.UNKNOWN);
         }
         if (element instanceof PyNamedParameter pyParam) {
             return new CodeElement(pyParam.getName(), CodeElementType.PARAMETER);

@@ -4,7 +4,9 @@ import com.github.nymann.commitrefactoring.domain.CodeElement;
 import com.github.nymann.commitrefactoring.domain.CodeElementType;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.extensions.ExtensionPointName;
+import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.listeners.RefactoringEventData;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CodeElementFactory {
@@ -29,5 +31,11 @@ public class CodeElementFactory {
         }
         logger.warn("No CodeElementProviders registered");
         return new CodeElement("UNKNOWN", CodeElementType.UNKNOWN);
+    }
+
+    public static CodeElement createFromPsiElement(@NotNull PsiElement element) {
+        RefactoringEventData eventData = new RefactoringEventData();
+        eventData.addElement(element);
+        return create(eventData);
     }
 }

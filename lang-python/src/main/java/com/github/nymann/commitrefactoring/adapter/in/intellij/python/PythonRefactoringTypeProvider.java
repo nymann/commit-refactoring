@@ -11,7 +11,8 @@ public class PythonRefactoringTypeProvider implements RefactoringTypeProvider {
         return switch (refactoringId) {
             case "refactoring.python.extract.variable", "refactoring.python.introduce.variable" -> RefactoringType.EXTRACT;
             case "refactoring.python.extract.method" -> RefactoringType.EXTRACT;
-            case "refactoring.python.inline.local", "refactoring.python.inline.local.variable" -> RefactoringType.INLINE;
+            case "refactoring.python.inline.local", "refactoring.python.inline.local.variable",
+                 "refactoring.inlineMethod" -> RefactoringType.INLINE;
             case "refactoring.python.rename" -> RefactoringType.RENAME;
             case "refactoring.python.move" -> RefactoringType.MOVE;
             case "refactoring.python.safeDelete" -> RefactoringType.SAFE_DELETE;
