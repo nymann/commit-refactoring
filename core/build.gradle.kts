@@ -18,7 +18,7 @@ java {
 
 dependencies {
     testRuntimeOnly("junit:junit:4.13.2")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
     testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
 
     intellijPlatform {
