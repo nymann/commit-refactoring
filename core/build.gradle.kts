@@ -12,14 +12,15 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
 dependencies {
     testRuntimeOnly("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
-    testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.5.1")
 
     intellijPlatform {
         intellijIdea(providers.gradleProperty("platformVersion"))

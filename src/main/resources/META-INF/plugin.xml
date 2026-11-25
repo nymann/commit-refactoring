@@ -5,6 +5,7 @@
     <vendor>nymann</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.platform.vcs</depends>
     <depends>Git4Idea</depends>
     <extensionPoints>
         <extensionPoint name="codeElementProvider"

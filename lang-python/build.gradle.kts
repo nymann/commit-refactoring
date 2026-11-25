@@ -12,7 +12,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -21,6 +21,6 @@ dependencies {
 
     intellijPlatform {
         intellijIdea(providers.gradleProperty("platformVersion"))
-        plugins(listOf("PythonCore:253.31033.145"))
+        plugins(listOf("PythonCore:263.7307.353"))
     }
 }
