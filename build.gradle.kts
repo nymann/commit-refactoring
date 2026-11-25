@@ -13,7 +13,7 @@ group = providers.gradleProperty("pluginGroup").get()
 version = providers.gradleProperty("pluginVersion").get()
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(25)
 }
 
 repositories {
@@ -24,12 +24,14 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":core"))
-
-    implementation(project(":lang-java"))
-    implementation(project(":lang-python"))
-
     intellijPlatform {
+        // Compose the modules into the main plugin jar: plugin.xml uses v1 optional <depends config-file="...">,
+        // which are not resolved from jars in lib/modules (default packaging since IntelliJ Platform Gradle Plugin 2.14)
+        pluginComposedModule(implementation(project(":core")))
+
+        pluginComposedModule(implementation(project(":lang-java")))
+        pluginComposedModule(implementation(project(":lang-python")))
+
         intellijIdea(providers.gradleProperty("platformVersion"))
         bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
 
